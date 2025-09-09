@@ -1,0 +1,242 @@
+Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+2firebase.ts:43 Getting redirect result...
+firebase.ts:43 Getting redirect result...
+firebase.ts:43 Getting redirect result...
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+15firebase.ts:43 Getting redirect result...
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+2firebase.ts:43 Getting redirect result...
+firebase.ts:43 Getting redirect result...
+firebase.ts:43 Getting redirect result...
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+15firebase.ts:43 Getting redirect result...
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+2firebase.ts:43 Getting redirect result...
+firebase.ts:43 Getting redirect result...
+firebase.ts:43 Getting redirect result...
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+15firebase.ts:43 Getting redirect result...
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+2firebase.ts:43 Getting redirect result...
+firebase.ts:43 Getting redirect result...
+firebase.ts:43 Getting redirect result...
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+15firebase.ts:43 Getting redirect result...
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+2firebase.ts:43 Getting redirect result...
+firebase.ts:43 Getting redirect result...
+firebase.ts:43 Getting redirect result...
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+15firebase.ts:43 Getting redirect result...
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+2firebase.ts:43 Getting redirect result...
+firebase.ts:43 Getting redirect result...
+firebase.ts:43 Getting redirect result...
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+15firebase.ts:43 Getting redirect result...
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}
+useAuth.ts:40 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: 'BGEoY7y3AcgsPpEPyjyBKOsKV6S2', …}

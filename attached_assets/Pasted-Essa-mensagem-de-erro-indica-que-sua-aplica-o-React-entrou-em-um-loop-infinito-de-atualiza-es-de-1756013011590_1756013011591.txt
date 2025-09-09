@@ -1,0 +1,74 @@
+Essa mensagem de erro indica que sua aplicação React entrou em um **loop infinito de atualizações de estado**, o que é um problema sério de performance e pode travar a interface. Vamos destrinchar:
+
+---
+
+### ⚠️ O que significa o erro?
+
+```plaintext
+Warning: Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.
+```
+
+Esse aviso é gerado quando o React detecta que um componente está atualizando seu estado repetidamente sem parar — geralmente porque o `setState` (ou `setSomething`) está sendo chamado dentro de um `useEffect` que é executado em **todas as renderizações**.
+
+---
+
+### 🧠 O que pode ter causado isso?
+
+As causas mais comuns são:
+
+- O `useEffect` **não possui array de dependências**, então é executado a cada render.
+- O array de dependências contém uma **variável que muda constantemente**, como um estado que é alterado dentro do próprio `useEffect`.
+- O `setState` dentro do `useEffect` está **reagindo a algo que ele mesmo altera**, criando um ciclo.
+
+Exemplo problemático:
+
+```tsx
+useEffect(() => {
+  setCount(count + 1); // Isso causa render -> useEffect -> setCount -> render -> ...
+}, [count]); // count muda a cada render, então o efeito nunca para
+```
+
+---
+
+### ✅ Como corrigir
+
+#### 1. **Verifique o `useEffect`**
+Garanta que ele tenha um array de dependências **correto** ou esteja vazio se for para rodar uma única vez:
+
+```tsx
+useEffect(() => {
+  // Código que só deve rodar uma vez
+}, []); // Executa apenas na montagem
+```
+
+#### 2. **Evite atualizar estado com base em algo que muda constantemente**
+Se precisar usar `setState` com base em um valor anterior, use a função de atualização:
+
+```tsx
+setCount(prev => prev + 1);
+```
+
+#### 3. **Revisar o componente `NotificationSystem`**
+O erro aponta para este componente:
+
+```
+at NotificationSystem (src/components/NotificationSystem.tsx:30:20)
+```
+
+Verifique se há algum `useEffect` lá que esteja atualizando estado sem controle. Algo como:
+
+```tsx
+useEffect(() => {
+  setNotifications([...notifications, novaNotificacao]);
+}, [notifications]);
+```
+
+Esse padrão pode causar o loop se `notifications` estiver sendo alterado dentro do próprio efeito.
+
+---
+
+### 🛠️ Dica final
+
+Se estiver usando bibliotecas como Radix UI (Popover, Tooltip), certifique-se de que os componentes estão sendo usados corretamente e que não há efeitos colaterais não intencionais.
+
+Se quiser, posso revisar o trecho do `NotificationSystem.tsx` com você e sugerir uma correção mais precisa.

@@ -1,0 +1,60 @@
+Essa mensagem de erro indica que o navegador tentou acessar um recurso da API no endpoint:
+
+```
+api/users/by-email/m….help%40gmail.com
+```
+
+E recebeu como resposta um **status HTTP 404 (Not Found)** — ou seja, o servidor não conseguiu encontrar esse recurso.
+
+---
+
+### 🔍 O que significa esse erro?
+
+O código `404` é retornado quando o servidor não encontra o que foi solicitado. No caso, parece que a aplicação tentou buscar um usuário pelo e-mail `m….help@gmail.com` (o `%40` é a codificação URL para `@`), mas esse usuário **não existe** ou o endpoint está **mal formado**.
+
+---
+
+### 🧨 Possíveis causas
+
+1. **Usuário não cadastrado**  
+   O e-mail fornecido não está registrado no banco de dados da aplicação.
+
+2. **Erro de digitação ou truncamento no e-mail**  
+   O e-mail pode ter sido cortado ou mal formatado (`m….help@gmail.com` parece incompleto).
+
+3. **Endpoint incorreto ou mal implementado**  
+   A rota `api/users/by-email/:email` pode não estar corretamente configurada no backend.
+
+4. **Codificação incorreta na URL**  
+   O e-mail pode não estar sendo corretamente codificado antes de ser enviado na URL.
+
+---
+
+### ✅ Como corrigir
+
+#### 1. **Verifique se o e-mail está correto e completo**
+Certifique-se de que o e-mail enviado na requisição está completo e válido.
+
+#### 2. **Use codificação adequada**
+Ao enviar e-mails na URL, use `encodeURIComponent(email)` para evitar problemas com caracteres especiais:
+
+```ts
+const email = encodeURIComponent("meuemail@gmail.com");
+fetch(`/api/users/by-email/${email}`);
+```
+
+#### 3. **Trate erros no frontend**
+Adicione tratamento para o erro 404, como exibir uma mensagem amigável ao usuário:
+
+```ts
+if (response.status === 404) {
+  alert("Usuário não encontrado. Verifique o e-mail e tente novamente.");
+}
+```
+
+#### 4. **Verifique a rota no backend**
+No servidor, garanta que a rota `GET /api/users/by-email/:email` esteja implementada corretamente e que o e-mail seja buscado de forma segura no banco de dados.
+
+---
+
+Se quiser, posso te ajudar a revisar o trecho de código que faz essa requisição ou até sugerir uma estrutura melhor para a API. Só mandar!

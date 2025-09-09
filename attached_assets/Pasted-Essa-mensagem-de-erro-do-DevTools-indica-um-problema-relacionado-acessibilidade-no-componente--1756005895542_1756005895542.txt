@@ -1,0 +1,57 @@
+Essa mensagem de erro do DevTools indica um problema relacionado à **acessibilidade** no componente `{DialogContent}` da sua aplicação React. Vamos destrinchar:
+
+---
+
+### ⚠️ O que significa o erro?
+
+```plaintext
+Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+```
+
+Esse aviso está dizendo que o componente de diálogo (`DialogContent`) não possui uma **descrição acessível** para leitores de tela. Em aplicações acessíveis, é importante que elementos como diálogos informem ao usuário o que está sendo exibido — especialmente para pessoas que usam tecnologias assistivas.
+
+---
+
+### 🧠 O que pode ter causado isso?
+
+Esse erro geralmente ocorre quando:
+
+- O componente `<DialogContent>` não está vinculado a um elemento que fornece uma descrição textual.
+- O atributo `aria-describedby` está ausente ou definido como `undefined`.
+- Nenhum componente `<DialogDescription>` (ou equivalente) foi incluído dentro do diálogo.
+
+---
+
+### ✅ Como corrigir
+
+Você pode resolver isso de duas formas:
+
+#### 1. **Adicionar um componente de descrição**
+Se estiver usando uma biblioteca como Radix UI ou Headless UI, inclua um componente de descrição dentro do diálogo:
+
+```tsx
+<DialogContent aria-describedby="dialog-description">
+  <DialogDescription id="dialog-description">
+    Este diálogo permite que você edite os detalhes do produto.
+  </DialogDescription>
+  {/* Conteúdo do diálogo */}
+</DialogContent>
+```
+
+#### 2. **Usar `aria-describedby` manualmente**
+Se você já tem um elemento que descreve o conteúdo, vincule-o com `aria-describedby`:
+
+```tsx
+<DialogContent aria-describedby="meu-descritivo">
+  <p id="meu-descritivo">Este diálogo permite que você edite os detalhes do produto.</p>
+  {/* Conteúdo do diálogo */}
+</DialogContent>
+```
+
+---
+
+### 🎯 Por que isso importa?
+
+Além de evitar warnings no console, isso melhora a **experiência de usuários com deficiência visual**, tornando sua aplicação mais inclusiva e compatível com padrões como WCAG e ARIA.
+
+Se quiser, posso revisar o trecho do seu código onde o diálogo é definido e te ajudar a aplicar a correção diretamente.

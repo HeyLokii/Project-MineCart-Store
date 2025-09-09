@@ -1,0 +1,186 @@
+Sistema de Notificações para Marketplace de Conteúdo Digital Minecraft
+
+Preciso de um sistema completo de notificações para meu marketplace de produtos digitais de Minecraft (skins, mapas, modelos, addons, etc.) com as seguintes funcionalidades:
+
+1. Tipos de Notificações:
+
+Para Administradores:
+
+Novo produto enviado para análise (skins, mapas, modelos, addons)
+
+Denúncias de usuários ou conteúdos inadequados
+
+Atividades suspeitas no sistema
+
+Solicitações de suporte técnico
+
+Para Vendedores/Criadores:
+
+Produto aprovado ou rejeitado (com motivo da rejeição)
+
+Novas vendas realizadas
+
+Mensagens de compradores sobre seus produtos
+
+Avaliações recebidas em seus produtos
+
+Produtos em destaque na plataforma
+
+Para Compradores:
+
+adicionar avaliaçao apos a compra de qualquer produto
+
+Download disponível para produtos adquiridos
+
+Atualizações em produtos comprados
+
+Ofertas especiais em categorias de interesse
+
+Itens da lista de desejos em promoção
+
+2. Funcionalidades do Sistema:
+
+Badge com contador de notificações não lidas no header
+
+Lista de notificações com marcador de lido/não lido
+
+Botão para marcar todas como lidas
+
+Filtros por tipo de notificação
+
+Notificações em tempo real (WebSockets ou polling)
+
+Diferentes ícones para diferentes tipos de notificação
+
+Persistência no banco de dados
+
+3. Estrutura do Banco de Dados:
+Crie uma tabela notificacoes com os campos:
+
+id (int, chave primária, auto_increment)
+
+id_usuario (int, relacionado à tabela usuarios)
+
+titulo (varchar)
+
+mensagem (text)
+
+tipo (enum: 'info', 'alerta', 'sucesso', 'erro')
+
+lida (boolean, padrão false)
+
+url_relacionada (varchar, URL para ação)
+
+data_criacao (datetime)
+
+categoria (enum: 'venda', 'analise', 'sistema', 'mensagem')
+
+4. Endpoints da API:
+
+GET /api/notificacoes - Listar notificações do usuário (com paginação)
+
+POST /api/notificacoes/marcar-como-lida - Marcar notificação como lida
+
+POST /api/notificacoes/marcar-todas-lidas - Marcar todas como lidas
+
+GET /api/notificacoes/contador-nao-lidas - Contador de não lidas
+
+DELETE /api/notificacoes/:id - Excluir notificação
+
+5. Interface do Usuário:
+
+Ícone de sino no header com contador de não lidas
+
+Dropdown com notificações recentes ao clicar no sino
+
+Página dedicada para visualizar todas as notificações
+
+Botões para ações rápidas (aprovar, rejeitar, visualizar produto)
+
+Design responsivo e tema compatível com Minecraft
+
+Ícones temáticos para diferentes tipos de conteúdo (skin, mapa, etc.)
+
+6. Fluxo de Notificações:
+
+Quando um criador envia um produto, criar notificação para admin:
+
+Tipo: "Análise de Conteúdo"
+
+Mensagem: "Novo [tipo] '[nome]' aguardando análise"
+
+Prioridade: Alta
+
+Link: "/admin/analise-produtos"
+
+Quando admin aprova/rejeita, criar notificação para criador:
+
+Tipo: "Status do Produto"
+
+Mensagem: "Seu [tipo] '[nome]' foi [aprovado/rejeitado]"
+
+Se rejeitado: incluir motivo
+
+Link: "/minha-loja/produtos"
+
+Quando uma venda é realizada:
+
+Para vendedor: "Você vendeu [produto] para [comprador]"
+
+Para comprador: "Compra realizada! Seu download já está disponível"
+
+7. Exemplo de Código para Criar Notificação:
+
+javascript
+// Função para criar notificação
+function criarNotificacao(idUsuario, titulo, mensagem, tipo, categoria, urlRelacionada = null) {
+  const query = `
+    INSERT INTO notificacoes (id_usuario, titulo, mensagem, tipo, categoria, url_relacionada, data_criacao)
+    VALUES (?, ?, ?, ?, ?, ?, NOW())
+  `;
+  // Executar query no banco
+}
+
+// Exemplo de uso - produto enviado para análise
+criarNotificacao(
+  idAdmin, 
+  'Produto para Análise', 
+  `Novo ${tipoProduto} "${nomeProduto}" enviado por ${nomeCriador} aguardando análise`, 
+  'alerta', 
+  'analise', 
+  '/admin/analise-produtos'
+);
+8. Tecnologias a Serem Utilizadas:
+
+Backend: Node.js/Express ou a linguagem do seu projeto
+
+Frontend: JavaScript para interatividade
+
+Banco de Dados: MySQL/PostgreSQL/MongoDB (o que estiver usando)
+
+WebSockets: Socket.io para notificações em tempo real
+
+9. Requisitos de UI/UX:
+
+Notificações devem ser exibidas por 5 segundos (toast)
+
+Diferentes cores para diferentes tipos (verde-sucesso, vermelho-erro, etc.)
+
+Animações suaves para aparecimento/desaparecimento
+
+Ícones temáticos de Minecraft para diferentes categorias
+
+Sistema de prioridade (cores mais vibrantes para notificações importantes)
+
+10. Personalização Temática Minecraft:
+
+Usar cores da paleta do Minecraft (verdes, marrons, azuis)
+
+Ícones pixelados ou inspirados no Minecraft
+
+Animações simples que lembrem o jogo
+
+Fontes que combinem com a estética do game
+
+Por favor, implemente este sistema integrado com a estrutura atual do projeto, criando todas as rotas, funções e componentes necessários com temática apropriada para um marketplace de Minecraft.
+

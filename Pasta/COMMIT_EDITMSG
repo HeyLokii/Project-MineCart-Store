@@ -1,0 +1,8 @@
+Restore normal authentication and remove mock data
+
+Removes all mock data and temporary access bypasses, enforcing real Firebase authentication and restoring normal system security.
+
+Replit-Commit-Author: Agent
+Replit-Commit-Session-Id: 84edfdc3-2651-4c93-b037-90d6f68242a4
+Replit-Commit-Checkpoint-Type: full_checkpoint
+Replit-Commit-Screenshot-Url: https://storage.googleapis.com/screenshot-production-us-central1/27e6ac39-3814-4aa2-bfd6-c141c9c98ffa/84edfdc3-2651-4c93-b037-90d6f68242a4/y5qMLGh

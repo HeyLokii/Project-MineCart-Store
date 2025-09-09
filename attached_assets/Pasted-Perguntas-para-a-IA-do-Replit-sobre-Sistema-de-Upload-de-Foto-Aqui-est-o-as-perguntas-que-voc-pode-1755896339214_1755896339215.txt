@@ -1,0 +1,38 @@
+Perguntas para a IA do Replit sobre Sistema de Upload de Foto
+Aqui estão as perguntas que você pode fazer para a IA do Replit para ajudar a implementar o sistema de upload de foto de perfil:
+
+1. Estrutura de Armazenamento:
+"Como você recomenda armazenar as fotos de perfil no projeto? Devo usar o sistema de arquivos local do Replit, ou é melhor integrar com um serviço de armazenamento em nuvem como AWS S3, Google Cloud Storage ou Cloudinary?"
+
+2. Processamento de Imagens:
+"Quais bibliotecas de processamento de imagem você recomenda para redimensionar e comprimir as fotos de perfil? Devo usar sharp, jimp ou outra biblioteca?"
+
+3. Nomenclatura de Arquivos:
+"Como devo nomear os arquivos de avatar para evitar conflitos e manter a organização? Devo usar IDs de usuário, timestamps ou hashes?"
+
+4. Segurança:
+"Quais medidas de segurança específicas devo implementar para prevenir uploads maliciosos? Como validar adequadamente os arquivos antes do processamento?"
+
+5. Limitações:
+"O Replit tem alguma limitação específica para upload de arquivos que devo considerar? Existe um tamanho máximo recomendado para os uploads?"
+
+6. Integração com Banco de Dados:
+"Qual é a melhor maneira de integrar o sistema de upload com o banco de dados atual? Devo armazenar o caminho completo ou relativo para a imagem?"
+
+7. Tratamento de Erros:
+"Quais tipos de erros específicos devo tratar no processo de upload e como devo fornecer feedback ao usuário?"
+
+8. Backup:
+"Como devo implementar um sistema de backup para as imagens de perfil no Replit?"
+
+9. Performace:
+"Como posso otimizar o carregamento das imagens de perfil para muitos usuários simultaneamente?"
+
+10. Fallback:
+"O que devo fazer se o upload falhar? Devo fornecer uma imagem de perfil padrão?"
+
+11. Formato de Imagem:
+"Quais formatos de imagem devo aceitar e como converter para formatos mais eficientes (como WebP) automaticamente?"
+
+12. Limites de Uso:
+"Devo implementar limites de upload por usuário (como número máximo de tentativas ou tempo entre mudanças de avatar)?"

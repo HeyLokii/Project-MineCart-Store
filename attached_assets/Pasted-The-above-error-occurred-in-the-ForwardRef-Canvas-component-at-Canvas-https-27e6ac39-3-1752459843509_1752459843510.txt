@@ -1,0 +1,25 @@
+The above error occurred in the <ForwardRef(Canvas)> component:
+
+    at Canvas (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-TRI2DPCA.js?v=f7a55328:48000:3)
+    at FiberProvider (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-TRI2DPCA.js?v=f7a55328:47856:21)
+    at CanvasWrapper
+    at div
+    at ThreeViewer (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/src/components/ThreeViewer.tsx:38:39)
+    at div
+    at div
+    at div
+    at ProductDetail (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/src/pages/ProductDetail.tsx:27:18)
+    at Route (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=f7a55328:323:16)
+    at Switch (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=f7a55328:379:17)
+    at main
+    at div
+    at Router
+    at div
+    at Provider (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-VIFX6DEG.js?v=f7a55328:48:15)
+    at TooltipProvider (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=f7a55328:59:5)
+    at QueryClientProvider (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=f7a55328:2805:3)
+    at App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+Cannot read properties of undefined (reading 'replit')

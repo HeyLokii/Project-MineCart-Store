@@ -1,0 +1,33 @@
+Warning: validateDOMNesting(...): <a> cannot appear as a descendant of &lt;a&gt;.
+    at a
+    at a
+    at https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=8a05ec64:337:18
+    at nav
+    at div
+    at header
+    at Header (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/src/components/Header.tsx:26:31)
+    at div
+    at Router
+    at div
+    at Provider (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-6IAFSJCN.js?v=8a05ec64:51:15)
+    at TooltipProvider (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=8a05ec64:2246:5)
+    at QueryClientProvider (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=8a05ec64:2805:3)
+    at App
+at a
+at a
+at https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=8a05ec64:337:18
+at nav
+at div
+at header
+at Header (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/src/components/Header.tsx:26:31)
+at div
+at Router
+at div
+at Provider (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-6IAFSJCN.js?v=8a05ec64:51:15)
+at TooltipProvider (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=8a05ec64:2246:5)
+at QueryClientProvider (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=8a05ec64:2805:3)
+at App
+at t.value (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:17465)
+at new t (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:12630)
+at t.value (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:32766)
+at https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:34400

@@ -1,0 +1,35 @@
+Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+VM115:747 Edge revert page translation.
+AdminDashboardSafe.tsx:261 Dados do produto: 
+Object
+2
+AdminDashboardSafe.tsx:388 
+ Uncaught TypeError: product.price.toFixed is not a function
+    at AdminDashboardSafe.tsx:388:73
+    at Array.map (<anonymous>)
+    at AdminDashboardSafe (AdminDashboardSafe.tsx:374:28)
+react-dom.development.js:18704 
+ The above error occurred in the <AdminDashboardSafe> component:
+
+    at AdminDashboardSafe (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/src/components/AdminDashboardSafe.tsx:60:41)
+    at div
+    at div
+    at Admin (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/src/pages/Admin.tsx:25:29)
+    at Route (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.repli…/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=57935554:323:16)
+    at Switch (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.repli…/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=57935554:379:17)
+    at main
+    at div
+    at Router (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/src/App.tsx?v=kglaQZBzo5yAMVn0tizFO:46:35)
+    at div
+    at Provider (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.repli…unner/workspace/node_modules/.vite/deps/chunk-MNSHGHEV.js?v=57935554:43:15)
+    at TooltipProvider (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.repli…rkspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=57935554:63:5)
+    at QueryClientProvider (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.repli…rkspace/node_modules/.vite/deps/@tanstack_react-query.js?v=57935554:2805:3)
+    at App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+react-dom.development.js:12056 
+ Uncaught TypeError: product.price.toFixed is not a function
+    at AdminDashboardSafe.tsx:388:73
+    at Array.map (<anonymous>)
+    at AdminDashboardSafe (AdminDashboardSafe.tsx:374:28)

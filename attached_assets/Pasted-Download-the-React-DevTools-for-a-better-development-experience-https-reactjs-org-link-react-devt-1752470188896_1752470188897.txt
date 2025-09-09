@@ -1,0 +1,76 @@
+Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+17firebase.ts:43 Getting redirect result...
+useAuth.ts:12 Auth state changed: _UserImpl
+useAuth.ts:12 Auth state changed: _UserImpl
+useAuth.ts:12 Auth state changed: _UserImpl
+useAuth.ts:12 Auth state changed: _UserImpl
+useAuth.ts:12 Auth state changed: _UserImpl
+useAuth.ts:12 Auth state changed: _UserImpl
+useAuth.ts:12 Auth state changed: _UserImpl
+useAuth.ts:12 Auth state changed: _UserImpl
+useAuth.ts:12 Auth state changed: _UserImpl
+useAuth.ts:12 Auth state changed: _UserImpl
+useAuth.ts:12 Auth state changed: _UserImpl
+useAuth.ts:12 Auth state changed: _UserImpl
+useAuth.ts:12 Auth state changed: _UserImpl
+useAuth.ts:12 Auth state changed: _UserImpl
+useAuth.ts:12 Auth state changed: _UserImpl
+useAuth.ts:12 Auth state changed: _UserImpl
+useAuth.ts:12 Auth state changed: _UserImpl
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+firebase.ts:45 Redirect result: null
+dialog.tsx:519  `DialogContent` requires a `DialogTitle` for the component to be accessible for screen reader users.
+
+If you want to hide the `DialogTitle`, you can wrap it with our VisuallyHidden component.
+
+For more information, see https://radix-ui.com/primitives/docs/components/dialog
+(anônimo) @ dialog.tsx:519
+commitHookEffectListMount @ react-dom.development.js:23189
+commitPassiveMountOnFiber @ react-dom.development.js:24965
+commitPassiveMountEffects_complete @ react-dom.development.js:24930
+commitPassiveMountEffects_begin @ react-dom.development.js:24917
+commitPassiveMountEffects @ react-dom.development.js:24905
+flushPassiveEffectsImpl @ react-dom.development.js:27078
+flushPassiveEffects @ react-dom.development.js:27023
+commitRootImpl @ react-dom.development.js:26974
+commitRoot @ react-dom.development.js:26721
+performSyncWorkOnRoot @ react-dom.development.js:26156
+flushSyncCallbacks @ react-dom.development.js:12042
+(anônimo) @ react-dom.development.js:25690
+dialog.tsx:542  Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+(anônimo) @ dialog.tsx:542
+commitHookEffectListMount @ react-dom.development.js:23189
+commitPassiveMountOnFiber @ react-dom.development.js:24965
+commitPassiveMountEffects_complete @ react-dom.development.js:24930
+commitPassiveMountEffects_begin @ react-dom.development.js:24917
+commitPassiveMountEffects @ react-dom.development.js:24905
+flushPassiveEffectsImpl @ react-dom.development.js:27078
+flushPassiveEffects @ react-dom.development.js:27023
+commitRootImpl @ react-dom.development.js:26974
+commitRoot @ react-dom.development.js:26721
+performSyncWorkOnRoot @ react-dom.development.js:26156
+flushSyncCallbacks @ react-dom.development.js:12042
+(anônimo) @ react-dom.development.js:25690
+[NOVO] Explique os erros do Console usando o Copilot no Edge: clique em
+         
+         para explicar um erro.
+        Saiba mais
+        Não mostrar novamente
+firebase.ts:43 Getting redirect result...
+useAuth.ts:12 Auth state changed: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: '2qh19ZycwCSf6lWcCaRtYT8vtUp1', …}
+firebase.ts:45 Redirect result: null

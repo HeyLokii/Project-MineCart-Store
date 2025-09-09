@@ -1,0 +1,59 @@
+Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+firebase.ts:71 🔥 Firebase authentication initialized with project: minecart-store
+useAuth.ts:55 Setting up global auth listener...
+firebase.ts:45 Checking for redirect result...
+useAuth.ts:59 Auth state: No user
+firebase.ts:52 No redirect result found
+firebase.ts:45 Checking for redirect result...
+firebase.ts:52 No redirect result found
+firebase.ts:28 Attempting Google sign in with popup...
+popup.ts:285  Cross-Origin-Opener-Policy policy would block the window.closed call.
+poll @ popup.ts:285
+popup.ts:285  Cross-Origin-Opener-Policy policy would block the window.closed call.
+poll @ popup.ts:285
+popup.ts:285  Cross-Origin-Opener-Policy policy would block the window.closed call.
+poll @ popup.ts:285
+popup.ts:285  Cross-Origin-Opener-Policy policy would block the window.closed call.
+poll @ popup.ts:285
+useAuth.ts:59 Auth state: heylokibr333@gmail.com
+Auth.tsx:113 Google login successful, redirecting...
+firebase.ts:45 Checking for redirect result...
+firebase.ts:52 No redirect result found
+firebase.ts:45 Checking for redirect result...
+firebase.ts:52 No redirect result found
+firebase.ts:45 Checking for redirect result...
+firebase.ts:52 No redirect result found
+dialog.tsx:519  `DialogContent` requires a `DialogTitle` for the component to be accessible for screen reader users.
+
+If you want to hide the `DialogTitle`, you can wrap it with our VisuallyHidden component.
+
+For more information, see https://radix-ui.com/primitives/docs/components/dialog
+(anônimo) @ dialog.tsx:519
+commitHookEffectListMount @ react-dom.development.js:23189
+commitPassiveMountOnFiber @ react-dom.development.js:24965
+commitPassiveMountEffects_complete @ react-dom.development.js:24930
+commitPassiveMountEffects_begin @ react-dom.development.js:24917
+commitPassiveMountEffects @ react-dom.development.js:24905
+flushPassiveEffectsImpl @ react-dom.development.js:27078
+flushPassiveEffects @ react-dom.development.js:27023
+commitRootImpl @ react-dom.development.js:26974
+commitRoot @ react-dom.development.js:26721
+performSyncWorkOnRoot @ react-dom.development.js:26156
+flushSyncCallbacks @ react-dom.development.js:12042
+(anônimo) @ react-dom.development.js:25690
+dialog.tsx:542  Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+(anônimo) @ dialog.tsx:542
+commitHookEffectListMount @ react-dom.development.js:23189
+commitPassiveMountOnFiber @ react-dom.development.js:24965
+commitPassiveMountEffects_complete @ react-dom.development.js:24930
+commitPassiveMountEffects_begin @ react-dom.development.js:24917
+commitPassiveMountEffects @ react-dom.development.js:24905
+flushPassiveEffectsImpl @ react-dom.development.js:27078
+flushPassiveEffects @ react-dom.development.js:27023
+commitRootImpl @ react-dom.development.js:26974
+commitRoot @ react-dom.development.js:26721
+performSyncWorkOnRoot @ react-dom.development.js:26156
+flushSyncCallbacks @ react-dom.development.js:12042
+(anônimo) @ react-dom.development.js:25690
+firebase.ts:45 Checking for redirect result...
+firebase.ts:52 No redirect result found

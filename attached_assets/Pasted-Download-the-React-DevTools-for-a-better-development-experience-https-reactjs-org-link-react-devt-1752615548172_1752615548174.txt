@@ -1,0 +1,25 @@
+Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+useAuth.ts:55 Setting up global auth listener...
+firebase.ts:52 Checking for redirect result...
+useAuth.ts:59 Auth state: No user
+firebase.ts:58 No redirect result found
+firebase.ts:52 Checking for redirect result...
+firebase.ts:58 No redirect result found
+firebase.ts:27 Attempting Google sign in with popup...
+identitytoolkit.googleapis.com/v1/projects?key=AIzaSyDNKXQ8QoMKkH8ZyKKt7TN9v2Gz5QRJc8M:1   Failed to load resource: the server responded with a status of 400 ()
+firebase.ts:33  Popup failed, trying redirect... FirebaseError: Firebase: Error (auth/api-key-not-valid.-please-pass-a-valid-api-key.).
+    at createErrorInternal (assert.ts:136:55)
+    at _fail (assert.ts:65:9)
+    at _performFetchWithErrorHandling (index.ts:195:9)
+    at async _validateOrigin (validate_origin.ts:33:33)
+signInWithGoogle @ firebase.ts:33
+Auth.tsx:119  Google sign in error: FirebaseError: Firebase: Error (auth/api-key-not-valid.-please-pass-a-valid-api-key.).
+    at createErrorInternal (assert.ts:136:55)
+    at _fail (assert.ts:65:9)
+    at _performFetchWithErrorHandling (index.ts:195:9)
+    at async _validateOrigin (validate_origin.ts:33:33)
+handleGoogleSignIn @ Auth.tsx:119
+www.googleapis.com/identitytoolkit/v3/relyingparty/getProjectConfig?key=AIzaSyDNKXQ8QoMKkH8ZyKKt7TN9v2Gz5QRJc8M&cb=1752615527139:1   Failed to load resource: the server responded with a status of 400 ()
+iframe.js:310  {"error":{"code":400,"message":"API key not valid. Please pass a valid API key.","errors":[{"message":"API key not valid. Please pass a valid API key.","domain":"global","reason":"badRequest"}],"status":"INVALID_ARGUMENT","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"API_KEY_INVALID","domain":"googleapis.com","metadata":{"service":"identitytoolkit.googleapis.com"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"API key not valid. Please pass a valid API key."}]}}
+ml @ iframe.js:310
+auth:1   Failed to load resource: the server responded with a status of 503 (Service Unavailable)

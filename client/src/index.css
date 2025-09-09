@@ -1,0 +1,817 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Line clamp utilities for text truncation */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@layer base {
+  :root {
+    /* Novas variáveis de cores personalizadas - Tema Escuro */
+    --laranja-principal: #FF7A00;
+    --laranja-alternativo: #F97316;
+    --amarelo-detalhes: #FFD166;
+    --cinza-escuro: #111827; /* Fundo principal muito escuro */
+    --cinza-medio: #1F2937; /* Cards e elementos */
+    --cinza-claro: #374151; /* Elementos destacados */
+    --branco: #F9FAFB; /* Texto claro */
+    --preto-suave: #030712; /* Muito escuro */
+    --verde-petroleo: #006D77;
+    --azul-marinho: #1D4ED8;
+
+    /* Esquema de cores usando as novas variáveis - Tema Escuro */
+    --background: 220 26% 7%; /* Muito escuro */
+    --foreground: 210 20% 98%; /* Texto muito claro */
+    --card: 220 13% 14%; /* Cards escuros */
+    --card-foreground: 210 20% 98%;
+    --popover: 220 13% 14%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 22 100% 50%; /* Laranja para acentos */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 13% 18%; /* Cinza escuro secundário */
+    --secondary-foreground: 210 20% 98%;
+    --muted: 220 13% 18%; /* Cinza escuro muted */
+    --muted-foreground: 215 16% 65%;
+    --accent: 45 100% 70%; /* Amarelo para destaques */
+    --accent-foreground: 220 26% 7%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 18%;
+    --input: 220 13% 18%;
+    --ring: 22 100% 50%;
+    --chart-1: 22 100% 50%; /* Laranja */
+    --chart-2: 45 100% 70%; /* Amarelo queimado */
+    --chart-3: 192 100% 23%; /* Verde petróleo */
+    --chart-4: 221 83% 53%; /* Azul marinho */
+    --chart-5: 0 0% 100%; /* Branco */
+    --radius: 0.75rem;
+    --sidebar-background: 220 26% 7%;
+    --sidebar-foreground: 210 20% 98%;
+    --sidebar-primary: 22 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 45 100% 70%;
+    --sidebar-accent-foreground: 220 26% 7%;
+    --sidebar-border: 220 13% 18%;
+    --sidebar-ring: 22 100% 50%;
+  }
+
+  .dark {
+    /* Modo escuro adaptado */
+    --background: 210 14% 14%; /* Preto suave #1F2937 */
+    --foreground: 0 0% 100%; /* Branco */
+    --card: 210 14% 18%;
+    --card-foreground: 0 0% 100%;
+    --popover: 210 14% 18%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 22 100% 50%; /* Laranja principal */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 192 100% 23%; /* Verde petróleo */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 14% 22%;
+    --muted-foreground: 215 16% 70%;
+    --accent: 45 100% 70%; /* Amarelo queimado */
+    --accent-foreground: 210 14% 14%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 210 14% 22%;
+    --input: 210 14% 22%;
+    --ring: 22 100% 50%;
+    --chart-1: 22 100% 50%; /* Laranja */
+    --chart-2: 45 100% 70%; /* Amarelo queimado */
+    --chart-3: 192 100% 23%; /* Verde petróleo */
+    --chart-4: 221 83% 53%; /* Azul marinho */
+    --chart-5: 0 0% 100%; /* Branco */
+    --sidebar-background: 210 14% 18%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 22 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 45 100% 70%;
+    --sidebar-accent-foreground: 210 14% 14%;
+    --sidebar-border: 210 14% 22%;
+    --sidebar-ring: 22 100% 50%;
+  }
+
+  /* Classes utilitárias para cores específicas */
+  .text-primary-orange {
+    color: #FF7A00 !important;
+  }
+
+  .text-accent-yellow {
+    color: #FFD166 !important;
+  }
+
+  .text-secondary-teal {
+    color: #006D77 !important;
+  }
+
+  .text-dark-safe {
+    color: #1F2937;
+  }
+
+  .dark .text-dark-safe {
+    color: #FFFFFF;
+  }
+
+  .text-light-safe {
+    color: #374151;
+  }
+
+  .dark .text-light-safe {
+    color: #E5E7EB;
+  }
+
+  .bg-primary-orange {
+    background-color: #FF7A00 !important;
+  }
+
+  .bg-accent-yellow {
+    background-color: #FFD166 !important;
+  }
+
+  .bg-secondary-teal {
+    background-color: #006D77 !important;
+  }
+}
+
+body {
+  @apply font-sans antialiased;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--cinza-escuro) !important;
+  color: var(--branco) !important;
+  margin: 0 auto !important;
+  max-width: 1400px !important;
+  width: 100% !important;
+}
+
+html {
+  background-color: var(--cinza-escuro) !important;
+}
+
+/* Centralização do layout principal */
+.min-h-screen {
+  margin: 0 auto !important;
+  max-width: 1400px !important;
+  width: 100% !important;
+}
+
+/* Força o fundo escuro em todos os elementos principais */
+.min-h-screen, 
+[class*="bg-background"] {
+  background-color: var(--cinza-escuro) !important;
+}
+
+/* Cards com fundo escuro médio */
+.bg-card,
+[class*="card"],
+[class*="bg-card"] {
+  background-color: var(--cinza-medio) !important;
+  border: 1px solid var(--cinza-claro) !important;
+}
+
+/* Cards especiais que precisam se destacar */
+.card-highlight {
+  background-color: var(--cinza-claro) !important;
+  border: 1px solid var(--laranja-principal) !important;
+}
+
+@layer components {
+  /* Transições suaves para todos elementos interativos */
+  .transition-smooth {
+    transition: all 0.3s ease;
+  }
+
+  .minecraftia {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8em;
+    line-height: 1.6;
+  }
+
+  .card-hover {
+    transition: all 0.3s ease;
+  }
+
+  .card-hover:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .star-rating {
+    display: inline-flex;
+    gap: 2px;
+  }
+
+  .star-filled {
+    color: #FCD34D;
+    fill: #FCD34D;
+  }
+
+  .star-half {
+    color: #FCD34D;
+    fill: url(#half-star-gradient);
+  }
+
+  .star-empty {
+    color: #374151;
+    opacity: 0.3;
+  }
+
+  /* Gradient for half stars */
+  .star-gradient-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  /* Estilos personalizados para a logo */
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .logo-image {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+
+  .logo-text {
+    font-weight: 700;
+    font-size: 1.25rem;
+    background: linear-gradient(135deg, var(--laranja-principal), var(--amarelo-detalhes));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* BOTÕES COM BORDAS SIMPLES */
+  button, 
+  .button, 
+  [role="button"] {
+    transition: all 0.3s ease !important;
+  }
+
+  /* Botões de categoria e arquivo especiais */
+  .category-button {
+    border: 1px solid hsl(var(--border)) !important;
+    background-color: transparent !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transform: scale(1) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .category-button::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent) !important;
+    transition: left 0.5s ease !important;
+  }
+
+  .category-button:hover::before {
+    left: 100% !important;
+  }
+
+  .category-button:hover {
+    border: 1px solid hsl(var(--primary)) !important;
+    background-color: hsl(var(--primary) / 0.05) !important;
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 8px 25px rgba(255, 122, 0, 0.2) !important;
+  }
+
+  .category-button.active,
+  .category-button[aria-pressed="true"],
+  .category-button[data-state="on"] {
+    border: 1px solid hsl(var(--primary)) !important;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.15), hsl(var(--primary) / 0.05)) !important;
+    transform: translateY(-1px) scale(1.05) !important;
+    box-shadow: 0 6px 20px rgba(255, 122, 0, 0.3) !important;
+    color: hsl(var(--primary)) !important;
+    font-weight: 600 !important;
+  }
+
+  .category-button.active::after,
+  .category-button[aria-pressed="true"]::after,
+  .category-button[data-state="on"]::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 3px !important;
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent))) !important;
+    animation: slideIn 0.3s ease-out !important;
+  }
+
+  .file-type-button {
+    border: 1px solid hsl(var(--border)) !important;
+    background-color: transparent !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transform: scale(1) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .file-type-button::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent) !important;
+    transition: left 0.5s ease !important;
+  }
+
+  .file-type-button:hover::before {
+    left: 100% !important;
+  }
+
+  .file-type-button:hover {
+    border: 1px solid hsl(var(--primary)) !important;
+    background-color: hsl(var(--primary) / 0.05) !important;
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 8px 25px rgba(255, 122, 0, 0.2) !important;
+  }
+
+  .file-type-button.active,
+  .file-type-button[aria-pressed="true"],
+  .file-type-button[data-state="on"] {
+    border: 1px solid hsl(var(--primary)) !important;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.15), hsl(var(--primary) / 0.05)) !important;
+    transform: translateY(-1px) scale(1.05) !important;
+    box-shadow: 0 6px 20px rgba(255, 122, 0, 0.3) !important;
+    color: hsl(var(--primary)) !important;
+    font-weight: 600 !important;
+  }
+
+  .file-type-button.active::after,
+  .file-type-button[aria-pressed="true"]::after,
+  .file-type-button[data-state="on"]::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 3px !important;
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent))) !important;
+    animation: slideIn 0.3s ease-out !important;
+  }
+
+  /* Animação para a barra inferior */
+  @keyframes slideIn {
+    from {
+      width: 0%;
+      opacity: 0;
+    }
+    to {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+
+  /* Efeito de pulso para botões ativos */
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 6px 20px rgba(255, 122, 0, 0.3);
+    }
+    50% {
+      box-shadow: 0 6px 20px rgba(255, 122, 0, 0.5);
+    }
+    100% {
+      box-shadow: 0 6px 20px rgba(255, 122, 0, 0.3);
+    }
+  }
+
+  .category-button.active,
+  .file-type-button.active {
+    animation: pulse 2s infinite !important;
+  }
+
+  /* Força para botões em modais */
+  .modal button,
+  [role="dialog"] button,
+  .dialog button {
+    border: 2px solid hsl(var(--border)) !important;
+  }
+
+  /* Força para toggles e switches */
+  .toggle,
+  [role="switch"],
+  .switch {
+    border: 2px solid hsl(var(--border)) !important;
+  }
+
+  /* Hover states para todos os botões */
+  button:hover,
+  .button:hover,
+  [role="button"]:hover {
+    border-color: hsl(var(--primary)) !important;
+  }
+
+  /* Gradientes com nova paleta */
+  .orange-gradient {
+    background: linear-gradient(135deg, var(--laranja-principal), var(--laranja-alternativo));
+  }
+
+  .yellow-gradient {
+    background: linear-gradient(135deg, var(--amarelo-detalhes), #FCD34D);
+  }
+
+  .teal-gradient {
+    background: linear-gradient(135deg, var(--verde-petroleo), var(--azul-marinho));
+  }
+
+  /* Botões com cores primárias */
+  .btn-primary {
+    background: var(--laranja-principal);
+    color: #FFFFFF;
+    border: 2px solid var(--laranja-principal);
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background: var(--laranja-alternativo);
+    border-color: var(--laranja-alternativo);
+  }
+
+  .btn-secondary {
+    background: var(--verde-petroleo);
+    color: #FFFFFF;
+    border: 2px solid var(--verde-petroleo);
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary:hover {
+    background: var(--azul-marinho);
+  }
+
+  .btn-accent {
+    background: var(--amarelo-detalhes);
+    color: var(--preto-suave);
+    border: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-accent:hover {
+    background: #FCD34D;
+  }
+
+  /* Headers com gradiente */
+  .header-gradient {
+    background: linear-gradient(135deg, var(--laranja-principal) 0%, var(--verde-petroleo) 100%);
+  }
+
+  /* Header e footer com fundo escuro */
+  .header-dark {
+    background-color: var(--preto-suave);
+    color: #FFFFFF;
+  }
+
+  /* Cards de produtos */
+  .product-card {
+    background-color: var(--cinza-medio);
+    border: 1px solid var(--cinza-claro);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .product-card:hover {
+    box-shadow: 0 8px 25px rgba(255, 122, 0, 0.2);
+    border-color: var(--laranja-principal);
+    transform: translateY(-2px);
+  }
+
+  /* Links e elementos interativos */
+  .link-interactive {
+    color: var(--laranja-principal);
+    transition: all 0.3s ease;
+  }
+
+  .link-interactive:hover {
+    color: var(--laranja-alternativo);
+  }
+
+  /* Cores específicas do tema */
+  .text-primary-orange {
+    color: var(--laranja-principal) !important;
+  }
+
+  .text-accent-yellow {
+    color: var(--amarelo-detalhes) !important;
+  }
+
+  .text-secondary-teal {
+    color: var(--verde-petroleo) !important;
+  }
+
+  .text-dark-safe {
+    color: var(--branco) !important;
+  }
+
+  .text-light-safe {
+    color: #F3F4F6 !important;
+  }
+
+  .bg-primary-orange {
+    background-color: var(--laranja-principal) !important;
+  }
+
+  .bg-accent-yellow {
+    background-color: var(--amarelo-detalhes) !important;
+  }
+
+  .bg-secondary-teal {
+    background-color: var(--verde-petroleo) !important;
+  }
+
+  .bg-dark-safe {
+    background-color: var(--cinza-escuro) !important;
+  }
+
+  .bg-medium-gray {
+    background-color: var(--cinza-medio) !important;
+  }
+
+  .bg-light-gray {
+    background-color: var(--cinza-claro) !important;
+  }
+
+  /* Bordas destacadas */
+  .border-highlight {
+    border: 2px solid var(--laranja-principal) !important;
+    border-radius: 8px;
+  }
+
+  .border-accent {
+    border: 1px solid var(--amarelo-detalhes) !important;
+  }
+
+  /* Cores específicas do Minecraft mantidas para compatibilidade */
+  .minecraft-green {
+    color: #4CAF50 !important;
+  }
+
+  .minecraft-orange {
+    color: var(--laranja-principal) !important;
+  }
+
+  .bg-minecraft-green {
+    background-color: #4CAF50;
+  }
+
+  .bg-minecraft-orange {
+    background-color: var(--laranja-principal);
+  }
+
+  /* Estilo para os botões principais */
+  .btn-primary {
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    border: 1px solid #ff6b35;
+    color: white;
+    transition: all 0.3s ease;
+  }
+
+  /* Garantir que todos os botões tenham borda */
+  .btn, button {
+    border: 1px solid transparent;
+  }
+
+  button:not([class*="border"]) {
+    border: 1px solid currentColor;
+  }
+
+  /* Estilos específicos para botões de ação */
+  .btn-approve {
+    border: 1px solid #10b981 !important;
+  }
+
+  .btn-reject {
+    border: 1px solid #ef4444 !important;
+  }
+
+  /* Toggle/Checkbox styling */
+  input[type="checkbox"] {
+    border: 1px solid #d1d5db;
+  }
+
+  input[type="checkbox"]:focus {
+    border-color: #ff6b35;
+    ring-color: #ff6b35;
+  }
+
+  /* Adiciona bordas a botões e elementos de formulário */
+  .discount-button {
+    @apply border border-orange-500 bg-orange-50 text-orange-700 hover:bg-orange-100 transition-colors;
+  }
+
+  /* Bordas para elementos de formulário */
+  .category-button {
+    @apply border border-gray-300 hover:border-gray-400 transition-colors;
+  }
+
+  .file-type-button {
+    @apply border border-gray-300 hover:border-gray-400 transition-colors;
+  }
+
+  /* Bordas para inputs em modais */
+  .modal-input {
+    @apply border border-gray-300 hover:border-gray-400 focus:border-primary transition-colors;
+  }
+
+  .modal-textarea {
+    @apply border border-gray-300 hover:border-gray-400 focus:border-primary transition-colors;
+  }
+
+  /* Efeitos adicionais para elementos do modal */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    transform: scale(1.01) !important;
+    box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.1) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  /* Efeito de brilho em botões principais */
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #ff6b35, #f7931e) !important;
+    box-shadow: 0 8px 25px rgba(255, 122, 0, 0.4) !important;
+    transform: translateY(-2px) !important;
+  }
+
+  /* Efeito de ondulação para cliques */
+  .category-button:active,
+  .file-type-button:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.1s ease !important;
+  }
+
+  /* Efeito de destaque para o switch de desconto */
+  .discount-switch:checked {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))) !important;
+    box-shadow: 0 4px 15px rgba(255, 122, 0, 0.3) !important;
+  }
+
+  /* Efeitos de hover para botões do menu lateral */
+  .sidebar-menu-button {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 8px !important;
+  }
+
+  .sidebar-menu-button:hover {
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--accent) / 0.05)) !important;
+    transform: translateX(8px) scale(1.02) !important;
+    box-shadow: 0 4px 15px rgba(255, 122, 0, 0.2) !important;
+    border-left: 3px solid hsl(var(--primary)) !important;
+  }
+
+  .sidebar-menu-button::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent) !important;
+    transition: left 0.5s ease !important;
+  }
+
+  .sidebar-menu-button:hover::before {
+    left: 100% !important;
+  }
+
+  .sidebar-menu-button:active {
+    transform: translateX(4px) scale(0.98) !important;
+    transition: transform 0.1s ease !important;
+  }
+
+  /* Efeito específico para ícones nos botões do menu */
+  .sidebar-menu-button svg {
+    transition: all 0.3s ease !important;
+  }
+
+  .sidebar-menu-button:hover svg {
+    color: hsl(var(--primary)) !important;
+    transform: scale(1.1) rotate(5deg) !important;
+    filter: drop-shadow(0 2px 4px rgba(255, 122, 0, 0.3)) !important;
+  }
+
+  /* Efeito para o texto dos botões do menu */
+  .sidebar-menu-button span {
+    transition: all 0.3s ease !important;
+  }
+
+  .sidebar-menu-button:hover span {
+    color: hsl(var(--primary)) !important;
+    font-weight: 600 !important;
+  }
+
+  /* Efeito de pulso para botões ativos do menu */
+  .sidebar-menu-button[data-active="true"] {
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.15), hsl(var(--accent) / 0.1)) !important;
+    border-left: 3px solid hsl(var(--primary)) !important;
+    animation: pulse-menu 2s infinite !important;
+  }
+
+  @keyframes pulse-menu {
+    0% {
+      box-shadow: 0 4px 15px rgba(255, 122, 0, 0.2);
+    }
+    50% {
+      box-shadow: 0 6px 20px rgba(255, 122, 0, 0.4);
+    }
+    100% {
+      box-shadow: 0 4px 15px rgba(255, 122, 0, 0.2);
+    }
+  }
+
+  /* Efeitos para botões do dropdown/menu */
+  .dropdown-menu-item {
+    transition: all 0.3s ease !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .dropdown-menu-item:hover {
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--accent) / 0.05)) !important;
+    transform: translateX(4px) !important;
+    color: hsl(var(--primary)) !important;
+    box-shadow: 0 2px 8px rgba(255, 122, 0, 0.15) !important;
+  }
+
+  .dropdown-menu-item::after {
+    content: '' !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 0 !important;
+    width: 0 !important;
+    height: 100% !important;
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))) !important;
+    transition: width 0.3s ease !important;
+  }
+
+  .dropdown-menu-item:hover::after {
+    width: 3px !important;
+  }
+
+  /* Efeitos para botões do menu mobile */
+  .mobile-menu-button {
+    transition: all 0.3s ease !important;
+    border-radius: 8px !important;
+  }
+
+  .mobile-menu-button:hover {
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--accent) / 0.05)) !important;
+    transform: scale(1.05) !important;
+    box-shadow: 0 4px 15px rgba(255, 122, 0, 0.2) !important;
+  }
+
+  /* Efeito de ripple para cliques */
+  .ripple-effect {
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .ripple-effect::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 0 !important;
+    height: 0 !important;
+    border-radius: 50% !important;
+    background: rgba(255, 122, 0, 0.3) !important;
+    transform: translate(-50%, -50%) !important;
+    transition: width 0.6s ease, height 0.6s ease !important;
+  }
+
+  .ripple-effect:active::after {
+    width: 200px !important;
+    height: 200px !important;
+  }
+}

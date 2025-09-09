@@ -1,0 +1,482 @@
+# MineCart Store - Especificação Técnica Completa
+
+## Visão Geral
+**Nome:** MineCart Store  
+**Logo:** [MineCart Logo](https://i.imgur.com/nZXvXDO.jpeg)  
+**Inspirações:**  
+- [Minecraft Marketplace](https://www.minecraft.net/pt-br/marketplace#main-content)  
+- [MCModels](https://mcmodels.net/categories/13-entities)  
+
+==================================================================
+                  ESPECIFICAÇÃO TÉCNICA COMPLETA
+==================================================================
+
+ÍNDICE:
+1.  Visão Geral do Projeto
+2.  Arquitetura do Sistema
+3.  Requisitos Funcionais
+4.  Requisitos Não-Funcionais
+5.  Design System
+6.  Fluxos de Trabalho
+7.  Componentes Frontend
+8.  API e Backend
+9.  Segurança e Compliance
+10. Documentos Legais
+11. Plano de Implementação
+12. Checklist de Entrega
+13. Apêndices
+
+==================================================================
+1. VISÃO GERAL DO PROJETO
+==================================================================
+
+1.1 Objetivo:
+Criar um marketplace premium para conteúdos de Minecraft com:
+- Sistema de autenticação multi-plataforma
+- Visualização 3D de produtos
+- Dashboard administrativo completo
+- Integração com sistemas de pagamento
+- Responsividade mobile-first
+
+1.2 Público-Alvo:
+- Criadores de conteúdo de Minecraft (15-35 anos)
+- Jogadores casuais e hardcore
+- Servidores de Minecraft procurando recursos premium
+
+1.3 Diferenciais Competitivos:
+► Visualizador 3D integrado diretamente no navegador
+► Sistema de comissão para criadores de conteúdo
+► Conversão automática de formatos (.java → .mcpack)
+► Integração direta com launchers populares
+
+==================================================================
+2. ARQUITETURA DO SISTEMA
+==================================================================
+
+2.1 Diagrama de Arquitetura:
+
+  +-------------------+     +-------------------+     +-------------------+
+  |   Frontend        |     |   Backend         |     |   Integrações     |
+  |   (Next.js)       |<--->|   (Firebase)      |<--->|   Externas        |
+  +-------------------+     +-------------------+     +-------------------+
+  | - Pages           |     | - Firestore       |     | - Stripe API      |
+  | - Components      |     | - Auth            |     | - Discord Webhook |
+  | - Public          |     | - Storage         |     | - Minecraft API   |
+  +-------------------+     +-------------------+     +-------------------+
+
+2.2 Tecnologias Principais:
+
+■ Frontend:
+- Next.js 14 (App Router)
+- React Three Fiber (3D)
+- Tailwind CSS + Framer Motion
+- Formik + Yup (formulários)
+
+■ Backend:
+- Firebase Firestore (NoSQL)
+- Firebase Authentication
+- Firebase Cloud Functions
+- Firebase Storage
+
+■ DevOps:
+- Vercel (frontend)
+- GitHub Actions (CI/CD)
+- Sentry (monitoramento)
+
+==================================================================
+3. REQUISITOS FUNCIONAIS
+==================================================================
+
+3.1 Módulo de Autenticação:
+RF001 - Login com Google, Facebook e Microsoft
+RF002 - Perfil de usuário com:
+        - Avatar personalizável
+        - Histórico de compras
+        - Lista de desejos
+RF003 - Sistema de recuperação de senha
+
+3.2 Catálogo de Produtos:
+RF004 - Filtros avançados por:
+        - Tipo (skin, mapa, mod, etc.)
+        - Preço (range slider)
+        - Avaliação (1-5 estrelas)
+RF005 - Visualização em:
+        - Grid (padrão)
+        - Lista (para mobile)
+RF006 - Barra de pesquisa com:
+        - Autocomplete
+        - Correção ortográfica
+        - Histórico de buscas
+
+3.3 Página de Produto:
+RF007 - Visualizador 3D interativo com:
+        - Rotação 360°
+        - Zoom
+        - Modo wireframe
+RF008 - Galeria de imagens (min. 3)
+RF009 - Sistema de avaliações com:
+        - Comentários
+        - Fotos de usuários
+        - Resposta do vendedor
+
+3.4 Sistema de Pagamento:
+RF010 - Checkout em 1 clique para:
+        - Usuários registrados
+        - Compra recorrente
+RF011 - Multiplos métodos:
+        - Cartão de crédito (Stripe)
+        - PayPal
+        - Pix (Brasil)
+RF012 - Geração automática de:
+        - Recibo fiscal
+        - Licença do produto
+
+3.5 Dashboard Administrativo:
+RF013 - CRUD completo para:
+        - Produtos
+        - Categorias
+        - Usuários
+RF014 - Relatórios de:
+        - Vendas (gráficos)
+        - Usuários ativos
+        - Produtos mais vendidos
+RF015 - Moderação de:
+        - Comentários
+        - Conteúdo reportado
+
+==================================================================
+4. REQUISITOS NÃO-FUNCIONAIS
+==================================================================
+
+4.1 Performance:
+RNF001 - Tempo de carregamento < 2s (Lighthouse)
+RNF002 - Suporte a 1000+ produtos sem lag
+RNF003 - Cacheamento eficiente de assets
+
+4.2 Segurança:
+RNF004 - Certificado SSL obrigatório
+RNF005 - Proteção contra:
+        - XSS
+        - CSRF
+        - SQL Injection
+RNF006 - Backup diário automático
+
+4.3 Usabilidade:
+RNF007 - Score WCAG > 90 (acessibilidade)
+RNF008 - Suporte completo a mobile
+RNF009 - Documentação contextual (tooltips)
+
+==================================================================
+5. DESIGN SYSTEM
+==================================================================
+
+5.1 Cores Primárias:
+- Primária: #4CAF50 (Verde Minecraft)
+- Secundária: #FF6B00 (Laranja)
+- Fundo: #121212 (Preto)
+- Texto: #E0E0E0 (Cinza claro)
+
+5.2 Tipografia:
+- Títulos: "Minecraftia" (pixelada)
+- Corpo: "Inter" (moderna)
+- Tamanhos:
+  - H1: 2.5rem
+  - H2: 2rem
+  - Corpo: 1rem
+
+5.3 Componentes UI:
+■ Botões:
+- Primário: bg-#4CAF50, hover:scale-105
+- Secundário: border-2, border-#FF6B00
+
+■ Cards:
+- box-shadow: 0 4px 12px rgba(0,0,0,0.3)
+- hover: transform: scale(1.02)
+
+■ Inputs:
+- border-radius: 4px
+- focus: ring-2 ring-#4CAF50
+
+==================================================================
+6. FLUXOS DE TRABALHO
+==================================================================
+
+6.1 Fluxo de Compra:
+
+1. Usuário navega no catálogo
+2. Clica em produto → visualiza 3D
+3. Adiciona ao carrinho
+4. Checkout (1 clique se logado)
+5. Pagamento via Stripe
+6. Download automático + email
+
+6.2 Fluxo de Vendedor:
+
+1. Acessa dashboard
+2. Submete novo produto:
+   - Upload arquivos
+   - Preenche metadados
+   - Define preço
+3. Aguarda aprovação (se necessário)
+4. Monitora vendas
+
+==================================================================
+7. COMPONENTES FRONTEND
+==================================================================
+
+7.1 ProductCard.jsx:
+
+export default function ProductCard({ product }) {
+  return (
+    <div className="product-card">
+      <ModelPreview model={product.modelUrl} />
+      <h3>{product.name}</h3>
+      <Rating stars={product.rating} />
+      <PriceTag price={product.price} />
+      <AddToCartButton productId={product.id} />
+    </div>
+  )
+}
+
+7.2 3DViewer.jsx:
+
+import { Canvas } from '@react-three/fiber'
+
+export function ModelViewer({ url }) {
+  const gltf = useGLTFLoader(url)
+  return (
+    <Canvas>
+      <ambientLight intensity={0.5} />
+      <Suspense fallback={<LoadingSpinner />}>
+        <primitive object={gltf.scene} />
+      </Suspense>
+    </Canvas>
+  )
+}
+
+==================================================================
+8. API E BACKEND
+==================================================================
+
+8.1 Estrutura Firestore:
+
+- /products
+  - {productId}
+    - name: string
+    - price: number
+    - 3dModelUrl: string
+    - createdAt: timestamp
+
+- /users
+  - {userId}
+    - email: string
+    - role: 'admin'|'seller'|'user'
+    - purchasedItems: array
+
+8.2 Cloud Functions:
+
+exports.onNewOrder = functions.firestore
+  .document('/orders/{orderId}')
+  .onCreate(async (snap, context) => {
+    // Enviar email de confirmação
+    // Gerar licença
+    // Atualizar estatísticas
+  })
+
+==================================================================
+9. SEGURANÇA E COMPLIANCE
+==================================================================
+
+9.1 Medidas de Segurança:
+
+- Autenticação JWT com expiry
+- CORS restrito
+- Rate limiting (100 req/min)
+- Hash de senhas com bcrypt
+
+9.2 Conformidade Legal:
+
+- GDPR (Europa)
+- LGPD (Brasil)
+- COPPA (EUA, para menores)
+
+==================================================================
+10. DOCUMENTOS LEGAIS
+==================================================================
+
+10.1 Termos de Serviço:
+
+SEÇÃO 1 - DEFINIÇÕES
+1.1 "Plataforma" refere-se ao MineCart Marketplace...
+1.2 "Conteúdo Digital" significa skins, mapas...
+
+SEÇÃO 2 - LICENÇA
+2.1 Licença não-exclusiva para uso pessoal...
+2.2 Proibida redistribuição comercial...
+
+10.2 Política de Privacidade:
+
+DADOS COLETADOS:
+- Email
+- Histórico de compras
+- Endereço IP (para segurança)
+
+COOKIES:
+- Sessão (obrigatório)
+- Analytics (opcional)
+
+==================================================================
+11. PLANO DE IMPLEMENTAÇÃO
+==================================================================
+
+Fase 1 (MVP - 4 semanas):
+- Autenticação
+- Catálogo básico
+- Página de produto
+
+Fase 2 (V1.0 - 6 semanas):
+- Dashboard admin
+- Sistema de pagamento
+- Visualizador 3D
+
+Fase 3 (V2.0 - 4 semanas):
+- Sistema de avaliações
+- Integração com launchers
+- Analytics avançado
+
+==================================================================
+12. CHECKLIST DE ENTREGA
+==================================================================
+
+[ ] Configuração inicial do projeto
+[ ] Autenticação social
+[ ] Páginas principais
+[ ] Sistema de pagamento
+[ ] Dashboard admin
+[ ] Documentos legais
+[ ] Testes automatizados
+[ ] Deploy em produção
+
+==================================================================
+13. APÊNDICES
+==================================================================
+
+Apêndice A - Modelo de Dados Completo
+Apêndice B - Fluxogramas Detalhados
+Apêndice C - Referências de Design
+Apêndice D - Checklist de Segurança
+
+# MineCart Store - Especificação Técnica (Área Admin + Visualizador 3D)
+
+## 🔐 ÁREA ADMINISTRATIVA
+
+### Contas Master
+```javascript
+// firebase-admin.js
+const SUPER_ADMINS = [
+  "admin@minecartstore.com",  // Conta principal
+  "dev@minecartstore.com",    // Conta de desenvolvimento
+  "replit-admin@minecartstore.com"  // Conta do Replit
+];
+Painel de Controle
+jsx
+// admin-dashboard.jsx
+export default function AdminPanel() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-6">
+      {/* Seção de Design */}
+      <DesignCustomizer />
+      
+      {/* Seção de Conteúdo 3D */}
+      <ModelManager />
+      
+      {/* Seção de Usuários */}
+      <UserAdminConsole />
+    </div>
+  )
+}
+Funcionalidades Principais
+Editor de Tema em Tempo Real
+
+Modificação de cores/fontes
+
+Upload de logo personalizada
+
+Pré-visualização instantânea
+
+Gerenciamento de Modelos 3D
+
+Upload de arquivos (.glb, .obj)
+
+Conversão automática de formatos
+
+Pré-processamento de texturas
+
+Controle de Acesso Granular
+
+Hierarquia de 5 níveis de permissão
+
+Logs detalhados de todas as ações
+
+🕶️ VISUALIZADOR 3D
+Configuração Básica
+javascript
+// model-viewer.js
+const ModelViewer = ({ modelUrl }) => {
+  const { scene } = useGLTF(modelUrl);
+  return (
+    <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+      <ambientLight intensity={0.5} />
+      <Suspense fallback={<Loader />}>
+        <primitive object={scene} scale={0.8} />
+      </Suspense>
+    </Canvas>
+  );
+};
+Controles Interativos
+Rotação: Arraste com botão esquerdo
+
+Zoom: Scroll do mouse
+
+Modos:
+
+W - Wireframe
+
+T - Textura original
+
+B - Bounding box
+
+Sistema de Permissões
+javascript
+// permissions.js
+const check3DAccess = (user, model) => {
+  if (model.access === 'public') return true;
+  if (!user) return false;
+  
+  return (
+    user.roles.some(role => model.allowedRoles.includes(role)) ||
+    model.allowedUsers.includes(user.uid) ||
+    SUPER_ADMINS.includes(user.email)
+  );
+};
+Fluxo de Trabalho
+Upload do modelo na área admin
+
+Processamento automático (1-3 minutos)
+
+Atribuição de permissões
+
+Publicação no catálogo
+
+📁 Arquivos relacionados:
+
+/components/admin/ModelManager.jsx
+
+/lib/model-processor.js
+
+/styles/model-viewer.css
+
+███████████████████████████████████████████████████████████████████
+               ESPECIFICAÇÃO FINALIZADA - v1.0.0
+███████████████████████████████████████████████████████████████████
+

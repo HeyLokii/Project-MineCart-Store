@@ -1,0 +1,86 @@
+Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+ProfileSafe.tsx:189 Debug ProfileSafe - user: _UserImpl
+ProfileSafe.tsx:190 Debug ProfileSafe - userProfile: null
+ProfileSafe.tsx:191 Debug ProfileSafe - fetchedUserProfile: undefined
+ProfileSafe.tsx:192 Debug ProfileSafe - currentUserProfile: undefined
+ProfileSafe.tsx:193 Debug ProfileSafe - currentUserProfile.id: undefined
+ProfileSafe.tsx:189 Debug ProfileSafe - user: _UserImpl
+ProfileSafe.tsx:190 Debug ProfileSafe - userProfile: null
+ProfileSafe.tsx:191 Debug ProfileSafe - fetchedUserProfile: undefined
+ProfileSafe.tsx:192 Debug ProfileSafe - currentUserProfile: undefined
+ProfileSafe.tsx:193 Debug ProfileSafe - currentUserProfile.id: undefined
+ProfileSafe.tsx:189 Debug ProfileSafe - user: _UserImpl
+ProfileSafe.tsx:190 Debug ProfileSafe - userProfile: null
+ProfileSafe.tsx:191 Debug ProfileSafe - fetchedUserProfile: undefined
+ProfileSafe.tsx:192 Debug ProfileSafe - currentUserProfile: undefined
+ProfileSafe.tsx:193 Debug ProfileSafe - currentUserProfile.id: undefined
+ProfileSafe.tsx:189 Debug ProfileSafe - user: _UserImpl
+ProfileSafe.tsx:190 Debug ProfileSafe - userProfile: null
+ProfileSafe.tsx:191 Debug ProfileSafe - fetchedUserProfile: Object
+ProfileSafe.tsx:192 Debug ProfileSafe - currentUserProfile: Object
+ProfileSafe.tsx:193 Debug ProfileSafe - currentUserProfile.id: 1
+ProfileSafe.tsx:189 Debug ProfileSafe - user: _UserImpl
+ProfileSafe.tsx:190 Debug ProfileSafe - userProfile: null
+ProfileSafe.tsx:191 Debug ProfileSafe - fetchedUserProfile: Object
+ProfileSafe.tsx:192 Debug ProfileSafe - currentUserProfile: Object
+ProfileSafe.tsx:193 Debug ProfileSafe - currentUserProfile.id: 1
+ProfileSafe.tsx:222  Uncaught TypeError: Cannot read properties of null (reading 'location')
+    at ProfileSafe (ProfileSafe.tsx:222:32)
+    at renderWithHooks (react-dom.development.js:15486:18)
+    at updateFunctionComponent (react-dom.development.js:19617:20)
+    at beginWork (react-dom.development.js:21640:16)
+    at HTMLUnknownElement.callCallback2 (react-dom.development.js:4164:14)
+    at Object.invokeGuardedCallbackDev (react-dom.development.js:4213:16)
+    at invokeGuardedCallback (react-dom.development.js:4277:31)
+    at beginWork$1 (react-dom.development.js:27490:7)
+    at performUnitOfWork (react-dom.development.js:26596:12)
+    at workLoopSync (react-dom.development.js:26505:5)
+ProfileSafe.tsx:189 Debug ProfileSafe - user: _UserImpl
+ProfileSafe.tsx:190 Debug ProfileSafe - userProfile: null
+ProfileSafe.tsx:191 Debug ProfileSafe - fetchedUserProfile: Object
+ProfileSafe.tsx:192 Debug ProfileSafe - currentUserProfile: Object
+ProfileSafe.tsx:193 Debug ProfileSafe - currentUserProfile.id: 1
+ProfileSafe.tsx:189 Debug ProfileSafe - user: _UserImpl
+ProfileSafe.tsx:190 Debug ProfileSafe - userProfile: null
+ProfileSafe.tsx:191 Debug ProfileSafe - fetchedUserProfile: Object
+ProfileSafe.tsx:192 Debug ProfileSafe - currentUserProfile: Object
+ProfileSafe.tsx:193 Debug ProfileSafe - currentUserProfile.id: 1
+ProfileSafe.tsx:222  Uncaught TypeError: Cannot read properties of null (reading 'location')
+    at ProfileSafe (ProfileSafe.tsx:222:32)
+    at renderWithHooks (react-dom.development.js:15486:18)
+    at updateFunctionComponent (react-dom.development.js:19617:20)
+    at beginWork (react-dom.development.js:21640:16)
+    at HTMLUnknownElement.callCallback2 (react-dom.development.js:4164:14)
+    at Object.invokeGuardedCallbackDev (react-dom.development.js:4213:16)
+    at invokeGuardedCallback (react-dom.development.js:4277:31)
+    at beginWork$1 (react-dom.development.js:27490:7)
+    at performUnitOfWork (react-dom.development.js:26596:12)
+    at workLoopSync (react-dom.development.js:26505:5)
+react-dom.development.js:18704  The above error occurred in the <ProfileSafe> component:
+
+    at ProfileSafe (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/src/pages/ProfileSafe.tsx:36:33)
+    at Route (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=e628cbf4:323:16)
+    at Switch (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=e628cbf4:379:17)
+    at main
+    at div
+    at Router (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/src/App.tsx?v=So2c4-QIBKWQjK2-bsq39:46:35)
+    at div
+    at Provider (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-MNSHGHEV.js?v=e628cbf4:43:15)
+    at TooltipProvider (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=e628cbf4:63:5)
+    at QueryClientProvider (https://27e6ac39-3814-4aa2-bfd6-c141c9c98ffa-00-1btefb54b4oul.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=e628cbf4:2805:3)
+    at App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+logCapturedError @ react-dom.development.js:18704
+react-dom.development.js:12056  Uncaught TypeError: Cannot read properties of null (reading 'location')
+    at ProfileSafe (ProfileSafe.tsx:222:32)
+    at renderWithHooks (react-dom.development.js:15486:18)
+    at updateFunctionComponent (react-dom.development.js:19617:20)
+    at beginWork (react-dom.development.js:21640:16)
+    at beginWork$1 (react-dom.development.js:27465:14)
+    at performUnitOfWork (react-dom.development.js:26596:12)
+    at workLoopSync (react-dom.development.js:26505:5)
+    at renderRootSync (react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (react-dom.development.js:25889:20)
+    at performSyncWorkOnRoot (react-dom.development.js:26135:20)

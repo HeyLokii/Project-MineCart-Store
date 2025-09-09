@@ -1,0 +1,47 @@
+Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+AdminDashboardSafe.tsx:315 Dados do produto: Object
+ProfileSafe.tsx:189 Debug ProfileSafe - user: _UserImpl
+ProfileSafe.tsx:190 Debug ProfileSafe - userProfile: Object
+ProfileSafe.tsx:191 Debug ProfileSafe - fetchedUserProfile: undefined
+ProfileSafe.tsx:192 Debug ProfileSafe - currentUserProfile: Object
+ProfileSafe.tsx:193 Debug ProfileSafe - currentUserProfile.id: 1
+ProfileSafe.tsx:189 Debug ProfileSafe - user: _UserImpl
+ProfileSafe.tsx:190 Debug ProfileSafe - userProfile: Object
+ProfileSafe.tsx:191 Debug ProfileSafe - fetchedUserProfile: undefined
+ProfileSafe.tsx:192 Debug ProfileSafe - currentUserProfile: Object
+ProfileSafe.tsx:193 Debug ProfileSafe - currentUserProfile.id: 1
+ProfileSafe.tsx:189 Debug ProfileSafe - user: _UserImpl
+ProfileSafe.tsx:190 Debug ProfileSafe - userProfile: Object
+ProfileSafe.tsx:191 Debug ProfileSafe - fetchedUserProfile: undefined
+ProfileSafe.tsx:192 Debug ProfileSafe - currentUserProfile: Object
+ProfileSafe.tsx:193 Debug ProfileSafe - currentUserProfile.id: 1
+ProfileSafe.tsx:189 Debug ProfileSafe - user: _UserImpl
+ProfileSafe.tsx:190 Debug ProfileSafe - userProfile: Object
+ProfileSafe.tsx:191 Debug ProfileSafe - fetchedUserProfile: undefined
+ProfileSafe.tsx:192 Debug ProfileSafe - currentUserProfile: Object
+ProfileSafe.tsx:193 Debug ProfileSafe - currentUserProfile.id: 1
+ProfileSafe.tsx:189 Debug ProfileSafe - user: _UserImpl
+ProfileSafe.tsx:190 Debug ProfileSafe - userProfile: Object
+ProfileSafe.tsx:191 Debug ProfileSafe - fetchedUserProfile: undefined
+ProfileSafe.tsx:192 Debug ProfileSafe - currentUserProfile: Object
+ProfileSafe.tsx:193 Debug ProfileSafe - currentUserProfile.id: 1
+ProfileSafe.tsx:189 Debug ProfileSafe - user: _UserImpl
+ProfileSafe.tsx:190 Debug ProfileSafe - userProfile: Object
+ProfileSafe.tsx:191 Debug ProfileSafe - fetchedUserProfile: undefined
+ProfileSafe.tsx:192 Debug ProfileSafe - currentUserProfile: Object
+ProfileSafe.tsx:193 Debug ProfileSafe - currentUserProfile.id: 1
+ProfileSafe.tsx:189 Debug ProfileSafe - user: _UserImpl
+ProfileSafe.tsx:190 Debug ProfileSafe - userProfile: Object
+ProfileSafe.tsx:191 Debug ProfileSafe - fetchedUserProfile: undefined
+ProfileSafe.tsx:192 Debug ProfileSafe - currentUserProfile: Object
+ProfileSafe.tsx:193 Debug ProfileSafe - currentUserProfile.id: 1
+ProfileSafe.tsx:189 Debug ProfileSafe - user: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: '2qh19ZycwCSf6lWcCaRtYT8vtUp1', …}
+ProfileSafe.tsx:190 Debug ProfileSafe - userProfile: {id: 1, email: 'heylokibr333@gmail.com', firstName: 'Admin', lastName: 'Principal', displayName: 'AdminChefe', …}
+ProfileSafe.tsx:191 Debug ProfileSafe - fetchedUserProfile: undefined
+ProfileSafe.tsx:192 Debug ProfileSafe - currentUserProfile: {id: 1, email: 'heylokibr333@gmail.com', firstName: 'Admin', lastName: 'Principal', displayName: 'AdminChefe', …}
+ProfileSafe.tsx:193 Debug ProfileSafe - currentUserProfile.id: 1
+ProfileSafe.tsx:189 Debug ProfileSafe - user: _UserImpl {providerId: 'firebase', proactiveRefresh: ProactiveRefresh, reloadUserInfo: {…}, reloadListener: null, uid: '2qh19ZycwCSf6lWcCaRtYT8vtUp1', …}
+ProfileSafe.tsx:190 Debug ProfileSafe - userProfile: {id: 1, email: 'heylokibr333@gmail.com', firstName: 'Admin', lastName: 'Principal', displayName: 'AdminChefe', …}
+ProfileSafe.tsx:191 Debug ProfileSafe - fetchedUserProfile: undefined
+ProfileSafe.tsx:192 Debug ProfileSafe - currentUserProfile: {id: 1, email: 'heylokibr333@gmail.com', firstName: 'Admin', lastName: 'Principal', displayName: 'AdminChefe', …}
+ProfileSafe.tsx:193 Debug ProfileSafe - currentUserProfile.id: 1

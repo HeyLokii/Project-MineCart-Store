@@ -1,0 +1,63 @@
+🧠 **Explicação do erro: "Maximum update depth exceeded"**
+
+Esse erro indica que o React entrou em um **loop infinito de atualizações de estado**. Ele ocorre quando um componente chama `setState` (ou `useState`) dentro de um `useEffect` que é executado em **todas as renderizações**, sem controle adequado de dependências.
+
+### 🔍 Causa provável
+O erro menciona:
+
+> _“This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.”_
+
+Ou seja, o `useEffect` está sendo executado repetidamente porque:
+- ❌ Não possui um array de dependências (`[]`), ou
+- ⚠️ O array de dependências contém valores que mudam a cada renderização (como funções ou objetos criados inline).
+
+Isso faz com que o `setState` seja chamado indefinidamente, disparando novas renderizações e reiniciando o ciclo.
+
+---
+
+### 🛠 Como corrigir
+
+Aqui vai uma abordagem prática para resolver:
+
+#### ✅ 1. Adicione um array de dependências estável
+Se o efeito só precisa rodar uma vez (como em uma montagem de componente), use:
+
+```tsx
+useEffect(() => {
+  setState(...);
+}, []); // Executa apenas uma vez
+```
+
+#### ✅ 2. Evite dependências instáveis
+Se você precisa usar variáveis no array de dependências, certifique-se de que elas não mudam a cada render:
+
+```tsx
+const stableValue = useMemo(() => computeSomething(), []);
+useEffect(() => {
+  setState(stableValue);
+}, [stableValue]);
+```
+
+#### ✅ 3. Verifique chamadas indiretas
+O erro parece estar relacionado ao componente `NotificationSystem.tsx`. Verifique se há algo como:
+
+```tsx
+useEffect(() => {
+  setShowNotification(true); // Isso pode causar loop se não controlado
+});
+```
+
+Corrija com:
+
+```tsx
+useEffect(() => {
+  setShowNotification(true);
+}, []); // ou com dependências estáveis
+```
+
+---
+
+### 📍 Dica extra
+Se estiver usando bibliotecas como `@radix-ui/react-popover`, verifique se há efeitos colaterais internos que você está estendendo ou manipulando com `setState`. Às vezes, o problema pode vir de uma integração mal feita com componentes de terceiros.
+
+Se quiser, posso te ajudar a revisar o trecho exato do `NotificationSystem.tsx` que está causando isso. Só me mostrar!
