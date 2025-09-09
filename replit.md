@@ -1,75 +1,78 @@
-# MineCart Store - Replit Configuration
+# MineCart Store - Marketplace de Conteúdo Digital Minecraft
 
 ## Overview
-MineCart Store is a premium marketplace for Minecraft content, built as a full-stack e-commerce web application. The platform enables creators to sell digital assets like skins, maps, mods, textures, and worlds to Minecraft players. It features a comprehensive admin dashboard, user authentication, 3D product visualization, shopping cart functionality, and a complete order management system.
+
+MineCart Store is a premium marketplace for Minecraft content creators and players, featuring digital assets like skins, maps, mods, textures, and addons. The platform combines a modern e-commerce experience with specialized features for the Minecraft community, including 3D visualization, PIX payment integration, and a comprehensive admin dashboard for content management.
 
 ## User Preferences
+
 Preferred communication style: Simple, everyday language.
 
 ## System Architecture
 
 ### Frontend Architecture
-- **Framework**: React 18 with TypeScript for type safety
-- **Styling**: Tailwind CSS with a custom Minecraft-themed dark design system
-- **UI Components**: Radix UI primitives (20+ components) via Shadcn/ui for accessibility
-- **Routing**: Wouter lightweight router for client-side navigation
-- **State Management**: TanStack Query for server state and caching
-- **3D Visualization**: Three.js integration for 3D model viewing
-- **Build Tool**: Vite with hot module replacement
+- **Framework**: React 18 with TypeScript for type safety and modern development patterns
+- **Build System**: Vite for fast development and optimized production builds
+- **Routing**: Wouter for lightweight client-side navigation
+- **State Management**: TanStack Query for server state management and caching
+- **UI Framework**: Radix UI primitives with Shadcn/ui components for accessible, customizable interface
+- **Styling**: Tailwind CSS with custom Minecraft-themed dark design system
+- **3D Visualization**: React Three Fiber and Three.js for interactive 3D model viewing
+- **Form Handling**: React Hook Form with Zod validation
 
 ### Backend Architecture
 - **Runtime**: Node.js with Express.js framework
-- **Language**: TypeScript with ES modules
-- **API Design**: RESTful endpoints under `/api` prefix
-- **Development**: Integrated with Vite for unified development experience
+- **Language**: TypeScript with ES modules for modern JavaScript features
+- **API Design**: RESTful endpoints with `/api` prefix for clear separation
+- **Development Integration**: Vite proxy setup for unified development server
 
-### Database Design
-- **Database**: PostgreSQL via Neon serverless hosting
+### Database Architecture
+- **Database**: PostgreSQL hosted on Neon serverless platform
 - **ORM**: Drizzle ORM with TypeScript-first schema definitions
-- **Schema**: Users (authentication, roles, profiles), Products (categories, pricing, files), Orders (transactions, downloads), Reviews (ratings, comments)
-- **Migrations**: Managed via Drizzle Kit
+- **Schema Design**: Comprehensive data model including:
+  - Users (authentication, profiles, roles)
+  - Products (categories, pricing, files, approval status)
+  - Orders (transactions, downloads, payment tracking)
+  - Reviews (ratings, comments, moderation)
+  - Notifications (system alerts, user messages)
+  - Settings (application configuration)
+- **Migrations**: Managed through Drizzle Kit for version-controlled schema changes
 
-### Authentication & Security
-- **Primary Auth**: Firebase Authentication with Google OAuth
-- **Admin System**: Role-based access control with designated admin emails
-- **Session Management**: Firebase tokens with automatic refresh
-- **File Security**: Upload validation and secure file serving
+### Authentication & Authorization
+- **Primary Authentication**: Firebase Authentication with Google OAuth integration
+- **Session Management**: Firebase tokens with automatic refresh handling
+- **Role-Based Access**: Admin system with designated email-based permissions
+- **Profile System**: Complete user registration flow with profile completion requirements
 
-### Key Features & Components
-- **Product Management**: CRUD operations with 3D model support, YouTube video embedding, and categorization
-- **Shopping System**: Cart management, PIX payment integration, order tracking
-- **Admin Dashboard**: Product approval, user management, analytics, support system
-- **User Profiles**: Complete registration flow, profile customization, favorite products
-- **3D Viewer**: Interactive model display using Three.js and React Three Fiber
-- **Responsive Design**: Mobile-first approach with consistent dark theme
-
-### Data Flow Architecture
-- Frontend uses TanStack Query for API communication and caching
-- Express API handles all business logic and database interactions
-- Drizzle ORM provides type-safe database queries
-- Firebase handles authentication state across the application
-- File uploads processed through dedicated upload endpoints
+### Payment Integration
+- **Payment Method**: PIX (Brazilian instant payment system)
+- **Processing Flow**: Order creation, payment generation, status polling, automatic fulfillment
+- **Order Management**: Complete transaction tracking and download delivery system
 
 ## External Dependencies
 
-### Core Services
-- **Firebase**: Authentication service, Google OAuth provider, potential file storage
-- **Neon Database**: Serverless PostgreSQL hosting with connection pooling
-- **Replit**: Development and deployment platform
+### Cloud Services
+- **Firebase**: Authentication and session management
+- **Neon Database**: PostgreSQL serverless hosting
+- **Stripe**: Payment processing infrastructure (configured for PIX)
 
-### Payment Integration
-- **PIX Payment System**: Brazilian instant payment method integration
-- **Payment Status Polling**: Real-time payment verification system
-
-### Development Tools
-- **TypeScript**: Type safety across frontend and backend
-- **Vite**: Build tool and development server
-- **Drizzle Kit**: Database migration and schema management
+### UI and Component Libraries
+- **Radix UI**: Accessible component primitives for dialogs, popovers, navigation
+- **Shadcn/ui**: Pre-built component library with Tailwind integration
+- **React Three Fiber**: 3D rendering and model visualization
 - **TanStack Query**: Server state management and API caching
 
-### UI/UX Libraries
-- **Tailwind CSS**: Utility-first CSS framework
-- **Radix UI**: Accessible component primitives
-- **React Hook Form**: Form management and validation
-- **React Icons**: Icon library for UI elements
-- **Three.js**: 3D graphics rendering for product visualization
+### Development Tools
+- **Drizzle ORM**: Database schema management and migrations
+- **Vite**: Build tooling and development server
+- **TypeScript**: Type safety and developer experience
+- **Tailwind CSS**: Utility-first styling framework
+
+### File Processing
+- **Multer**: File upload handling (configured for avatar uploads)
+- **Image Processing**: Sharp or similar library for avatar optimization
+
+### Brazilian Payment Integration
+- **PIX Payment System**: Direct integration with Brazilian instant payment infrastructure
+- **QR Code Generation**: For PIX payment codes
+- **Payment Status Polling**: Real-time payment verification system
