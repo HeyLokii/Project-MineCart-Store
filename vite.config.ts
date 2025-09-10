@@ -11,6 +11,7 @@ export default defineConfig({
       "@assets": path.resolve(import.meta.dirname, "assets"),
     },
   },
+  base: "./",
   root: path.resolve(import.meta.dirname),
   publicDir: path.resolve(import.meta.dirname, "public"),
   build: {
