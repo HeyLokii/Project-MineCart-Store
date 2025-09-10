@@ -32,6 +32,7 @@ import AdminSupport from "@/pages/AdminSupport";
 import AdminSettings from "@/pages/AdminSettings";
 import NotFound from "@/pages/not-found";
 import { useAuth } from "@/hooks/useAuth";
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function Router() {
   const [location, setLocation] = useLocation();
@@ -172,6 +173,7 @@ function AppContent() {
       )}
 
       <Toaster />
+      <SpeedInsights />
 
       {/* Modais dos Termos e Política - Always render */}
       <TermsModal open={showTermsModal} onOpenChange={setShowTermsModal} />
