@@ -1,0 +1,743 @@
+GIT-CONFIG(1)                                                                                          Git Manual                                                                                         GIT-CONFIG(1)
+
+NAME
+       git-config - Get and set repository or global options
+
+SYNOPSIS
+       git config [<file-option>] [--type=<type>] [--fixed-value] [--show-origin] [--show-scope] [-z|--null] <name> [<value> [<value-pattern>]]
+       git config [<file-option>] [--type=<type>] --add <name> <value>
+       git config [<file-option>] [--type=<type>] [--fixed-value] --replace-all <name> <value> [<value-pattern>]
+       git config [<file-option>] [--type=<type>] [--show-origin] [--show-scope] [-z|--null] [--fixed-value] --get <name> [<value-pattern>]
+       git config [<file-option>] [--type=<type>] [--show-origin] [--show-scope] [-z|--null] [--fixed-value] --get-all <name> [<value-pattern>]
+       git config [<file-option>] [--type=<type>] [--show-origin] [--show-scope] [-z|--null] [--fixed-value] [--name-only] --get-regexp <name-regex> [<value-pattern>]
+       git config [<file-option>] [--type=<type>] [-z|--null] --get-urlmatch <name> <URL>
+       git config [<file-option>] [--fixed-value] --unset <name> [<value-pattern>]
+       git config [<file-option>] [--fixed-value] --unset-all <name> [<value-pattern>]
+       git config [<file-option>] --rename-section <old-name> <new-name>
+       git config [<file-option>] --remove-section <name>
+       git config [<file-option>] [--show-origin] [--show-scope] [-z|--null] [--name-only] -l | --list
+       git config [<file-option>] --get-color <name> [<default>]
+       git config [<file-option>] --get-colorbool <name> [<stdout-is-tty>]
+       git config [<file-option>] -e | --edit
+
+DESCRIPTION
+       You can query/set/replace/unset options with this command. The name is actually the section and the key separated by a dot, and the value will be escaped.
+
+       Multiple lines can be added to an option by using the --add option. If you want to update or unset an option which can occur on multiple lines, a value-pattern (which is an extended regular expression, unless
+       the --fixed-value option is given) needs to be given. Only the existing values that match the pattern are updated or unset. If you want to handle the lines that do not match the pattern, just prepend a single
+       exclamation mark in front (see also the section called “EXAMPLES”), but note that this only works when the --fixed-value option is not in use.
+
+       The --type=<type> option instructs git config to ensure that incoming and outgoing values are canonicalize-able under the given <type>. If no --type=<type> is given, no canonicalization will be performed.
+       Callers may unset an existing --type specifier with --no-type.
+
+       When reading, the values are read from the system, global and repository local configuration files by default, and options --system, --global, --local, --worktree and --file <filename> can be used to tell the
+       command to read from only that location (see the section called “FILES”).
+
+       When writing, the new value is written to the repository local configuration file by default, and options --system, --global, --worktree, --file <filename> can be used to tell the command to write to that
+       location (you can say --local but that is the default).
+
+       This command will fail with non-zero status upon error. Some exit codes are:
+
+       •   The section or key is invalid (ret=1),
+
+       •   no section or name was provided (ret=2),
+
+       •   the config file is invalid (ret=3),
+
+       •   the config file cannot be written (ret=4),
+
+       •   you try to unset an option which does not exist (ret=5),
+
+       •   you try to unset/set an option for which multiple lines match (ret=5), or
+
+       •   you try to use an invalid regexp (ret=6).
+
+       On success, the command returns the exit code 0.
+       
+       
+       A list of all available configuration variables can be obtained using the git help --config command.
+
+OPTIONS
+       --replace-all
+           Default behavior is to replace at most one line. This replaces all lines matching the key (and optionally the value-pattern).
+
+       --add
+           Adds a new line to the option without altering any existing values. This is the same as providing ^$ as the value-pattern in --replace-all.
+
+       --get
+           Get the value for a given key (optionally filtered by a regex matching the value). Returns error code 1 if the key was not found and the last value if multiple key values were found.
+
+       --get-all
+           Like get, but returns all values for a multi-valued key.
+
+       --get-regexp
+           Like --get-all, but interprets the name as a regular expression and writes out the key names. Regular expression matching is currently case-sensitive and done against a canonicalized version of the key in
+           which section and variable names are lowercased, but subsection names are not.
+
+       --get-urlmatch <name> <URL>
+           When given a two-part name section.key, the value for section.<URL>.key whose <URL> part matches the best to the given URL is returned (if no such key exists, the value for section.key is used as a
+           fallback). When given just the section as name, do so for all the keys in the section and list them. Returns error code 1 if no value is found.
+
+       --global
+           For writing options: write to global ~/.gitconfig file rather than the repository .git/config, write to $XDG_CONFIG_HOME/git/config file if this file exists and the ~/.gitconfig file doesn’t.
+
+           For reading options: read only from global ~/.gitconfig and from $XDG_CONFIG_HOME/git/config rather than from all available files.
+
+           See also the section called “FILES”.
+
+       --system
+           For writing options: write to system-wide $(prefix)/etc/gitconfig rather than the repository .git/config.
+
+           For reading options: read only from system-wide $(prefix)/etc/gitconfig rather than from all available files.
+
+           See also the section called “FILES”.
+
+       --local
+           For writing options: write to the repository .git/config file. This is the default behavior.
+
+           For reading options: read only from the repository .git/config rather than from all available files.
+
+           See also the section called “FILES”.
+
+       --worktree
+           Similar to --local except that $GIT_DIR/config.worktree is read from or written to if extensions.worktreeConfig is enabled. If not it’s the same as --local. Note that $GIT_DIR is equal to $GIT_COMMON_DIR
+           for the main working tree, but is of the form $GIT_DIR/worktrees/<id>/ for other working trees. See git-worktree(1) to learn how to enable extensions.worktreeConfig.
+
+       -f <config-file>, --file <config-file>
+           For writing options: write to the specified file rather than the repository .git/config.
+
+           For reading options: read only from the specified file rather than from all available files.
+
+           See also the section called “FILES”.
+
+           --blob <blob>
+           Similar to --file but use the given blob instead of a file. E.g. you can use master:.gitmodules to read values from the file .gitmodules in the master branch. See "SPECIFYING REVISIONS" section in
+           gitrevisions(7) for a more complete list of ways to spell blob names.
+
+       --remove-section
+           Remove the given section from the configuration file.
+
+       --rename-section
+           Rename the given section to a new name.
+
+       --unset
+           Remove the line matching the key from config file.
+
+       --unset-all
+           Remove all lines matching the key from config file.
+
+       -l, --list
+           List all variables set in config file, along with their values.
+
+       --fixed-value
+           When used with the value-pattern argument, treat value-pattern as an exact string instead of a regular expression. This will restrict the name/value pairs that are matched to only those where the value is
+           exactly equal to the value-pattern.
+
+       --type <type>
+           git config will ensure that any input or output is valid under the given type constraint(s), and will canonicalize outgoing values in <type>'s canonical form.
+
+           Valid <type>'s include:
+
+           •   bool: canonicalize values as either "true" or "false".
+
+           •   int: canonicalize values as simple decimal numbers. An optional suffix of k, m, or g will cause the value to be multiplied by 1024, 1048576, or 1073741824 upon input.
+
+           •   bool-or-int: canonicalize according to either bool or int, as described above.
+
+           •   path: canonicalize by expanding a leading ~ to the value of $HOME and ~user to the home directory for the specified user. This specifier has no effect when setting the value (but you can use git
+               config section.variable ~/ from the command line to let your shell do the expansion.)
+
+           •   expiry-date: canonicalize by converting from a fixed or relative date-string to a timestamp. This specifier has no effect when setting the value.
+
+           •   color: When getting a value, canonicalize by converting to an ANSI color escape sequence. When setting a value, a sanity-check is performed to ensure that the given value is canonicalize-able as an
+               ANSI color, but it is written as-is.
+
+       --bool, --int, --bool-or-int, --path, --expiry-date
+           Historical options for selecting a type specifier. Prefer instead --type (see above).
+
+       --no-type
+           Un-sets the previously set type specifier (if one was previously set). This option requests that git config not canonicalize the retrieved variable.  --no-type has no effect without --type=<type> or
+           --<type>.
+
+       -z, --null
+           For all options that output values and/or keys, always end values with the null character (instead of a newline). Use newline instead as a delimiter between key and value. This allows for secure parsing
+           of the output without getting confused e.g. by values that contain line breaks.
+
+       --name-only
+           Output only the names of config variables for --list or --get-regexp.
+
+       --show-origin
+       Augment the output of all queried config options with the origin type (file, standard input, blob, command line) and the actual origin (config file path, ref, or blob id if applicable).
+
+       --show-scope
+           Similar to --show-origin in that it augments the output of all queried config options with the scope of that value (worktree, local, global, system, command).
+
+       --get-colorbool <name> [<stdout-is-tty>]
+           Find the color setting for <name> (e.g.  color.diff) and output "true" or "false".  <stdout-is-tty> should be either "true" or "false", and is taken into account when configuration says "auto". If
+           <stdout-is-tty> is missing, then checks the standard output of the command itself, and exits with status 0 if color is to be used, or exits with status 1 otherwise. When the color setting for name is
+           undefined, the command uses color.ui as fallback.
+
+       --get-color <name> [<default>]
+           Find the color configured for name (e.g.  color.diff.new) and output it as the ANSI color escape sequence to the standard output. The optional default parameter is used instead, if there is no color
+           configured for name.
+
+           --type=color [--default=<default>] is preferred over --get-color (but note that --get-color will omit the trailing newline printed by --type=color).
+
+       -e, --edit
+           Opens an editor to modify the specified config file; either --system, --global, or repository (default).
+
+       --[no-]includes
+           Respect include.*  directives in config files when looking up values. Defaults to off when a specific file is given (e.g., using --file, --global, etc) and on when searching all config files.
+
+       --default <value>
+           When using --get, and the requested variable is not found, behave as if <value> were the value assigned to the that variable.
+
+CONFIGURATION
+       pager.config is only respected when listing configuration, i.e., when using --list or any of the --get-* which may return multiple results. The default is to use a pager.
+
+FILES
+       By default, git config will read configuration options from multiple files:
+
+       $(prefix)/etc/gitconfig
+           System-wide configuration file.
+
+       $XDG_CONFIG_HOME/git/config, ~/.gitconfig
+           User-specific configuration files. When the XDG_CONFIG_HOME environment variable is not set or empty, $HOME/.config/ is used as $XDG_CONFIG_HOME.
+
+           These are also called "global" configuration files. If both files exist, both files are read in the order given above.
+
+       $GIT_DIR/config
+           Repository specific configuration file.
+
+       $GIT_DIR/config.worktree
+           This is optional and is only searched when extensions.worktreeConfig is present in $GIT_DIR/config.
+
+       You may also provide additional configuration parameters when running any git command by using the -c option. See git(1) for details.
+
+       Options will be read from all of these files that are available. If the global or the system-wide configuration files are missing or unreadable they will be ignored. If the repository configuration file is
+       missing or unreadable, git config will exit with a non-zero error code. An error message is produced if the file is unreadable, but not if it is missing.
+
+       The files are read in the order given above, with last value found taking precedence over values read earlier. When multiple values are taken then all values of a key from all files will be used.
+
+       By default, options are only written to the repository specific configuration file. Note that this also affects options like --replace-all and --unset. git config will only ever change one file at a time.
+
+       You can limit which configuration sources are read from or written to by specifying the path of a file with the --file option, or by specifying a configuration scope with --system, --global, --local, or
+       --worktree. For more, see the section called “OPTIONS” above.
+
+       SCOPES
+       Each configuration source falls within a configuration scope. The scopes are:
+
+       system
+           $(prefix)/etc/gitconfig
+
+       global
+           $XDG_CONFIG_HOME/git/config
+
+           ~/.gitconfig
+
+       local
+           $GIT_DIR/config
+
+       worktree
+           $GIT_DIR/config.worktree
+
+       command
+           GIT_CONFIG_{COUNT,KEY,VALUE} environment variables (see the section called “ENVIRONMENT” below)
+
+           the -c option
+
+       With the exception of command, each scope corresponds to a command line option: --system, --global, --local, --worktree.
+
+       When reading options, specifying a scope will only read options from the files within that scope. When writing options, specifying a scope will write to the files within that scope (instead of the repository
+       specific configuration file). See the section called “OPTIONS” above for a complete description.
+
+       Most configuration options are respected regardless of the scope it is defined in, but some options are only respected in certain scopes. See the respective option’s documentation for the full details.
+
+   Protected configuration
+       Protected configuration refers to the system, global, and command scopes. For security reasons, certain options are only respected when they are specified in protected configuration, and ignored otherwise.
+
+       Git treats these scopes as if they are controlled by the user or a trusted administrator. This is because an attacker who controls these scopes can do substantial harm without using Git, so it is assumed that
+       the user’s environment protects these scopes against attackers.
+
+ENVIRONMENT
+       GIT_CONFIG_GLOBAL, GIT_CONFIG_SYSTEM
+           Take the configuration from the given files instead from global or system-level configuration. See git(1) for details.
+
+       GIT_CONFIG_NOSYSTEM
+           Whether to skip reading settings from the system-wide $(prefix)/etc/gitconfig file. See git(1) for details.
+
+       See also the section called “FILES”.
+
+       GIT_CONFIG_COUNT, GIT_CONFIG_KEY_<n>, GIT_CONFIG_VALUE_<n>
+           If GIT_CONFIG_COUNT is set to a positive number, all environment pairs GIT_CONFIG_KEY_<n> and GIT_CONFIG_VALUE_<n> up to that number will be added to the process’s runtime configuration. The config pairs
+           are zero-indexed. Any missing key or value is treated as an error. An empty GIT_CONFIG_COUNT is treated the same as GIT_CONFIG_COUNT=0, namely no pairs are processed. These environment variables will
+           override values in configuration files, but will be overridden by any explicit options passed via git -c.
+
+           This is useful for cases where you want to spawn multiple git commands with a common configuration but cannot depend on a configuration file, for example when writing scripts.
+
+       GIT_CONFIG
+           If no --file option is provided to git config, use the file given by GIT_CONFIG as if it were provided via --file. This variable has no effect on other Git commands, and is mostly for historical
+           compatibility; there is generally no reason to use it instead of the --file option.
+           EXAMPLES
+       Given a .git/config like this:
+
+           #
+           # This is the config file, and
+           # a '#' or ';' character indicates
+           # a comment
+           #
+
+           ; core variables
+           [core]
+                   ; Don't trust file modes
+                   filemode = false
+
+           ; Our diff algorithm
+           [diff]
+                   external = /usr/local/bin/diff-wrapper
+                   renames = true
+
+           ; Proxy settings
+           [core]
+                   gitproxy=proxy-command for kernel.org
+                   gitproxy=default-proxy ; for all the rest
+
+           ; HTTP
+           [http]
+                   sslVerify
+           [http "https://weak.example.com"]
+                   sslVerify = false
+                   cookieFile = /tmp/cookie.txt
+
+       you can set the filemode to true with
+
+           % git config core.filemode true
+
+       The hypothetical proxy command entries actually have a postfix to discern what URL they apply to. Here is how to change the entry for kernel.org to "ssh".
+
+           % git config core.gitproxy '"ssh" for kernel.org' 'for kernel.org$'
+
+       This makes sure that only the key/value pair for kernel.org is replaced.
+
+       To delete the entry for renames, do
+
+           % git config --unset diff.renames
+
+       If you want to delete an entry for a multivar (like core.gitproxy above), you have to provide a regex matching the value of exactly one line.
+
+       To query the value for a given key, do
+       % git config --get core.filemode
+
+       or
+
+           % git config core.filemode
+
+       or, to query a multivar:
+
+           % git config --get core.gitproxy "for kernel.org$"
+
+       If you want to know all the values for a multivar, do:
+
+           % git config --get-all core.gitproxy
+
+       If you like to live dangerously, you can replace all core.gitproxy by a new one with
+
+           % git config --replace-all core.gitproxy ssh
+
+       However, if you really only want to replace the line for the default proxy, i.e. the one without a "for ..." postfix, do something like this:
+
+           % git config core.gitproxy ssh '! for '
+
+       To actually match only values with an exclamation mark, you have to
+
+           % git config section.key value '[!]'
+
+       To add a new proxy, without altering any of the existing ones, use
+
+           % git config --add core.gitproxy '"proxy-command" for example.com'
+
+       An example to use customized color from the configuration in your script:
+
+           #!/bin/sh
+           WS=$(git config --get-color color.diff.whitespace "blue reverse")
+           RESET=$(git config --get-color "" "reset")
+           echo "${WS}your whitespace color or blue reverse${RESET}"
+
+       For URLs in https://weak.example.com, http.sslVerify is set to false, while it is set to true for all others:
+
+           % git config --type=bool --get-urlmatch http.sslverify https://good.example.com
+           true
+           true
+           % git config --type=bool --get-urlmatch http.sslverify https://weak.example.com
+           false
+           % git config --get-urlmatch http https://weak.example.com
+           http.cookieFile /tmp/cookie.txt
+           http.sslverify false
+
+CONFIGURATION FILE
+       The Git configuration file contains a number of variables that affect the Git commands' behavior. The files .git/config and optionally config.worktree (see the "CONFIGURATION FILE" section of git-worktree(1))
+       in each repository are used to store the configuration for that repository, and $HOME/.gitconfig is used to store a per-user configuration as fallback values for the .git/config file. The file /etc/gitconfig
+       can be used to store a system-wide default configuration.
+
+       The configuration variables are used by both the Git plumbing and the porcelain commands. The variables are divided into sections, wherein the fully qualified variable name of the variable itself is the last
+       dot-separated segment and the section name is everything before the last dot. The variable names are case-insensitive, allow only alphanumeric characters and -, and must start with an alphabetic character.
+       Some variables may appear multiple times; we say then that the variable is multivalued.
+
+   Syntax
+       The syntax is fairly flexible and permissive; whitespaces are mostly ignored. The # and ; characters begin comments to the end of line, blank lines are ignored.
+
+       The file consists of sections and variables. A section begins with the name of the section in square brackets and continues until the next section begins. Section names are case-insensitive. Only alphanumeric
+       characters, - and . are allowed in section names. Each variable must belong to some section, which means that there must be a section header before the first setting of a variable.
+
+       Sections can be further divided into subsections. To begin a subsection put its name in double quotes, separated by space from the section name, in the section header, like in the example below:
+
+                   [section "subsection"]
+
+       Subsection names are case sensitive and can contain any characters except newline and the null byte. Doublequote " and backslash can be included by escaping them as \" and \\, respectively. Backslashes
+       preceding other characters are dropped when reading; for example, \t is read as t and \0 is read as 0. Section headers cannot span multiple lines. Variables may belong directly to a section or to a given
+       subsection. You can have [section] if you have [section "subsection"], but you don’t need to.
+
+       There is also a deprecated [section.subsection] syntax. With this syntax, the subsection name is converted to lower-case and is also compared case sensitively. These subsection names follow the same
+       restrictions as section names.
+
+       All the other lines (and the remainder of the line after the section header) are recognized as setting variables, in the form name = value (or just name, which is a short-hand to say that the variable is the
+       boolean "true"). The variable names are case-insensitive, allow only alphanumeric characters and -, and must start with an alphabetic character.
+
+       A line that defines a value can be continued to the next line by ending it with a \; the backslash and the end-of-line are stripped. Leading whitespaces after name =, the remainder of the line after the first
+       comment character # or ;, and trailing whitespaces of the line are discarded unless they are enclosed in double quotes. Internal whitespaces within the value are retained verbatim.
+
+       Inside double quotes, double quote " and backslash \ characters must be escaped: use \" for " and \\ for \.
+
+       The following escape sequences (beside \" and \\) are recognized: \n for newline character (NL), \t for horizontal tabulation (HT, TAB) and \b for backspace (BS). Other char escape sequences (including octal
+       escape sequences) are invalid.
+ Includes
+       The include and includeIf sections allow you to include config directives from another source. These sections behave identically to each other with the exception that includeIf sections may be ignored if
+       their condition does not evaluate to true; see "Conditional includes" below.
+
+       You can include a config file from another by setting the special include.path (or includeIf.*.path) variable to the name of the file to be included. The variable takes a pathname as its value, and is subject
+       to tilde expansion. These variables can be given multiple times.
+
+       The contents of the included file are inserted immediately, as if they had been found at the location of the include directive. If the value of the variable is a relative path, the path is considered to be
+       relative to the configuration file in which the include directive was found. See below for examples.
+
+Conditional includes
+       You can conditionally include a config file from another by setting an includeIf.<condition>.path variable to the name of the file to be included.
+
+       The condition starts with a keyword followed by a colon and some data whose format and meaning depends on the keyword. Supported keywords are:
+
+       gitdir
+           The data that follows the keyword gitdir: is used as a glob pattern. If the location of the .git directory matches the pattern, the include condition is met.
+
+           The .git location may be auto-discovered, or come from $GIT_DIR environment variable. If the repository is auto-discovered via a .git file (e.g. from submodules, or a linked worktree), the .git location
+           would be the final location where the .git directory is, not where the .git file is.
+
+           The pattern can contain standard globbing wildcards and two additional ones, **/ and /**, that can match multiple path components. Please refer to gitignore(5) for details. For convenience:
+
+           •   If the pattern starts with ~/, ~ will be substituted with the content of the environment variable HOME.
+
+           •   If the pattern starts with ./, it is replaced with the directory containing the current config file.
+
+           •   If the pattern does not start with either ~/, ./ or /, **/ will be automatically prepended. For example, the pattern foo/bar becomes **/foo/bar and would match /any/path/to/foo/bar.
+
+           •   If the pattern ends with /, ** will be automatically added. For example, the pattern foo/ becomes foo/**. In other words, it matches "foo" and everything inside, recursively.
+
+       gitdir/i
+           This is the same as gitdir except that matching is done case-insensitively (e.g. on case-insensitive file systems)
+
+       onbranch
+           The data that follows the keyword onbranch: is taken to be a pattern with standard globbing wildcards and two additional ones, **/ and /**, that can match multiple path components. If we are in a worktree
+           where the name of the branch that is currently checked out matches the pattern, the include condition is met.
+
+           If the pattern ends with /, ** will be automatically added. For example, the pattern foo/ becomes foo/**. In other words, it matches all branches that begin with foo/. This is useful if your branches are
+           organized hierarchically and you would like to apply a configuration to all the branches in that hierarchy.
+
+               hasconfig:remote.*.url:
+           The data that follows this keyword is taken to be a pattern with standard globbing wildcards and two additional ones, **/ and /**, that can match multiple components. The first time this keyword is seen,
+           the rest of the config files will be scanned for remote URLs (without applying any values). If there exists at least one remote URL that matches this pattern, the include condition is met.
+
+           Files included by this option (directly or indirectly) are not allowed to contain remote URLs.
+
+           Note that unlike other includeIf conditions, resolving this condition relies on information that is not yet known at the point of reading the condition. A typical use case is this option being present as
+           a system-level or global-level config, and the remote URL being in a local-level config; hence the need to scan ahead when resolving this condition. In order to avoid the chicken-and-egg problem in which
+           potentially-included files can affect whether such files are potentially included, Git breaks the cycle by prohibiting these files from affecting the resolution of these conditions (thus, prohibiting them
+           from declaring remote URLs).
+
+           As for the naming of this keyword, it is for forwards compatibility with a naming scheme that supports more variable-based include conditions, but currently Git only supports the exact keyword described
+           above.
+
+       A few more notes on matching via gitdir and gitdir/i:
+
+       •   Symlinks in $GIT_DIR are not resolved before matching.
+
+       •   Both the symlink & realpath versions of paths will be matched outside of $GIT_DIR. E.g. if ~/git is a symlink to /mnt/storage/git, both gitdir:~/git and gitdir:/mnt/storage/git will match.
+
+           This was not the case in the initial release of this feature in v2.13.0, which only matched the realpath version. Configuration that wants to be compatible with the initial release of this feature needs
+           to either specify only the realpath version, or both versions.
+
+       •   Note that "../" is not special and will match literally, which is unlikely what you want.
+
+        Example
+           # Core variables
+           [core]
+                   ; Don't trust file modes
+                   filemode = false
+
+           # Our diff algorithm
+           [diff]
+                   external = /usr/local/bin/diff-wrapper
+                   renames = true
+
+           [branch "devel"]
+                   remote = origin
+                   merge = refs/heads/devel
+
+           # Proxy settings
+           [core]
+                   gitProxy="ssh" for "kernel.org"
+                   gitProxy=default-proxy ; for the rest
+
+           [include]
+                   path = /path/to/foo.inc ; include by absolute path
+                   path = foo.inc ; find "foo.inc" relative to the current file
+                   path = ~/foo.inc ; find "foo.inc" in your `$HOME` directory
+
+           ; include if $GIT_DIR is /path/to/foo/.git
+           [includeIf "gitdir:/path/to/foo/.git"]
+                   path = /path/to/foo.inc
+
+           ; include for all repositories inside /path/to/group
+           [includeIf "gitdir:/path/to/group/"]
+                   path = /path/to/foo.inc
+
+           ; include for all repositories inside $HOME/to/group
+           [includeIf "gitdir:~/to/group/"]
+                   path = /path/to/foo.inc
+
+           ; relative paths are always relative to the including
+           ; file (if the condition is true); their location is not
+           ; affected by the condition
+           [includeIf "gitdir:/path/to/group/"]
+                   path = foo.inc
+
+                   ; include only if we are in a worktree where foo-branch is
+           ; currently checked out
+           [includeIf "onbranch:foo-branch"]
+                   path = foo.inc
+
+           ; include only if a remote with the given URL exists (note
+           ; that such a URL may be provided later in a file or in a
+           ; file read after this file is read, as seen in this example)
+           [includeIf "hasconfig:remote.*.url:https://example.com/**"]
+                   path = foo.inc
+           [remote "origin"]
+                   url = https://example.com/git
+
+   Values
+       Values of many variables are treated as a simple string, but there are variables that take values of specific types and there are rules as to how to spell them.
+
+       boolean
+           When a variable is said to take a boolean value, many synonyms are accepted for true and false; these are all case-insensitive.
+
+           true
+               Boolean true literals are yes, on, true, and 1. Also, a variable defined without = <value> is taken as true.
+
+           false
+               Boolean false literals are no, off, false, 0 and the empty string.
+
+               When converting a value to its canonical form using the --type=bool type specifier, git config will ensure that the output is "true" or "false" (spelled in lowercase).
+
+       integer
+           The value for many variables that specify various sizes can be suffixed with k, M,... to mean "scale the number by 1024", "by 1024x1024", etc.
+
+           color
+           The value for a variable that takes a color is a list of colors (at most two, one for foreground and one for background) and attributes (as many as you want), separated by spaces.
+
+           The basic colors accepted are normal, black, red, green, yellow, blue, magenta, cyan, white and default. The first color given is the foreground; the second is the background. All the basic colors except
+           normal and default have a bright variant that can be specified by prefixing the color with bright, like brightred.
+
+           The color normal makes no change to the color. It is the same as an empty string, but can be used as the foreground color when specifying a background color alone (for example, "normal red").
+
+           The color default explicitly resets the color to the terminal default, for example to specify a cleared background. Although it varies between terminals, this is usually not the same as setting to "white
+           black".
+
+           Colors may also be given as numbers between 0 and 255; these use ANSI 256-color mode (but note that not all terminals may support this). If your terminal supports it, you may also specify 24-bit RGB
+           values as hex, like #ff0ab3.
+
+           The accepted attributes are bold, dim, ul, blink, reverse, italic, and strike (for crossed-out or "strikethrough" letters). The position of any attributes with respect to the colors (before, after, or in
+           between), doesn’t matter. Specific attributes may be turned off by prefixing them with no or no- (e.g., noreverse, no-ul, etc).
+
+           The pseudo-attribute reset resets all colors and attributes before applying the specified coloring. For example, reset green will result in a green foreground and default background without any active
+           attributes.
+
+           An empty color string produces no color effect at all. This can be used to avoid coloring specific elements without disabling color entirely.
+
+           For git’s pre-defined color slots, the attributes are meant to be reset at the beginning of each item in the colored output. So setting color.decorate.branch to black will paint that branch name in a
+           plain black, even if the previous thing on the same output line (e.g. opening parenthesis before the list of branch names in log --decorate output) is set to be painted with bold or some other attribute.
+           However, custom log formats may do more complicated and layered coloring, and the negated forms may be useful there.
+
+       pathname
+           A variable that takes a pathname value can be given a string that begins with "~/" or "~user/", and the usual tilde expansion happens to such a string: ~/ is expanded to the value of $HOME, and ~user/ to
+           the specified user’s home directory.
+
+           If a path starts with %(prefix)/, the remainder is interpreted as a path relative to Git’s "runtime prefix", i.e. relative to the location where Git itself was installed. For example, %(prefix)/bin/
+           refers to the directory in which the Git executable itself lives. If Git was compiled without runtime prefix support, the compiled-in prefix will be substituted instead. In the unlikely event that a
+           literal path needs to be specified that should not be expanded, it needs to be prefixed by ./, like so: ./%(prefix)/bin. Variables
+       Note that this list is non-comprehensive and not necessarily complete. For command-specific variables, you will find a more detailed description in the appropriate manual page.
+
+       Other git-related tools may and do use their own variables. When inventing new variables for use in your own tool, make sure their names do not conflict with those that are used by Git itself and other
+       popular tools, and describe them in your documentation.
+
+       advice.*
+           These variables control various optional help messages designed to aid new users. All advice.*  variables default to true, and you can tell Git that you do not need help by setting these to false:
+
+           ambiguousFetchRefspec
+               Advice shown when a fetch refspec for multiple remotes maps to the same remote-tracking branch namespace and causes branch tracking set-up to fail.
+
+           fetchShowForcedUpdates
+               Advice shown when git-fetch(1) takes a long time to calculate forced updates after ref updates, or to warn that the check is disabled.
+
+           pushUpdateRejected
+               Set this variable to false if you want to disable pushNonFFCurrent, pushNonFFMatching, pushAlreadyExists, pushFetchFirst, pushNeedsForce, and pushRefNeedsUpdate simultaneously.
+
+           pushNonFFCurrent
+               Advice shown when git-push(1) fails due to a non-fast-forward update to the current branch.
+
+           pushNonFFMatching
+               Advice shown when you ran git-push(1) and pushed matching refs explicitly (i.e. you used :, or specified a refspec that isn’t your current branch) and it resulted in a non-fast-forward error.
+
+           pushAlreadyExists
+               Shown when git-push(1) rejects an update that does not qualify for fast-forwarding (e.g., a tag.)
+
+           pushFetchFirst
+               Shown when git-push(1) rejects an update that tries to overwrite a remote ref that points at an object we do not have.
+
+           pushNeedsForce
+               Shown when git-push(1) rejects an update that tries to overwrite a remote ref that points at an object that is not a commit-ish, or make the remote ref point at an object that is not a commit-ish.
+
+           pushUnqualifiedRefname
+               Shown when git-push(1) gives up trying to guess based on the source and destination refs what remote ref namespace the source belongs in, but where we can still suggest that the user push to either
+               refs/heads/* or refs/tags/* based on the type of the source object.
+
+           pushRefNeedsUpdate
+               Shown when git-push(1) rejects a forced update of a branch when its remote-tracking ref has updates that we do not have locally.
+
+           skippedCherryPicks
+               Shown when git-rebase(1) skips a commit that has already been cherry-picked onto the upstream branch.
+
+               statusAheadBehind
+               Shown when git-status(1) computes the ahead/behind counts for a local ref compared to its remote tracking ref, and that calculation takes longer than expected. Will not appear if status.aheadBehind is
+               false or the option --no-ahead-behind is given.
+
+           statusHints
+               Show directions on how to proceed from the current state in the output of git-status(1), in the template shown when writing commit messages in git-commit(1), and in the help message shown by git-
+               switch(1) or git-checkout(1) when switching branches.
+
+           statusUoption
+               Advise to consider using the -u option to git-status(1) when the command takes more than 2 seconds to enumerate untracked files.
+
+           commitBeforeMerge
+               Advice shown when git-merge(1) refuses to merge to avoid overwriting local changes.
+
+           resetNoRefresh
+               Advice to consider using the --no-refresh option to git-reset(1) when the command takes more than 2 seconds to refresh the index after reset.
+
+           resolveConflict
+               Advice shown by various commands when conflicts prevent the operation from being performed.
+
+           sequencerInUse
+               Advice shown when a sequencer command is already in progress.
+
+           implicitIdentity
+               Advice on how to set your identity configuration when your information is guessed from the system username and domain name.
+
+           detachedHead
+               Advice shown when you used git-switch(1) or git-checkout(1) to move to the detached HEAD state, to instruct how to create a local branch after the fact.
+
+           suggestDetachingHead
+               Advice shown when git-switch(1) refuses to detach HEAD without the explicit --detach option.
+
+           checkoutAmbiguousRemoteBranchName
+               Advice shown when the argument to git-checkout(1) and git-switch(1) ambiguously resolves to a remote tracking branch on more than one remote in situations where an unambiguous argument would have
+               otherwise caused a remote-tracking branch to be checked out. See the checkout.defaultRemote configuration variable for how to set a given remote to be used by default in some situations where this
+               advice would be printed.
+
+           amWorkDir
+               Advice that shows the location of the patch file when git-am(1) fails to apply it.
+
+           rmHints
+               In case of failure in the output of git-rm(1), show directions on how to proceed from the current state.
+
+               addEmbeddedRepo
+               Advice on what to do when you’ve accidentally added one git repo inside of another.
+
+           ignoredHook
+               Advice shown if a hook is ignored because the hook is not set as executable.
+
+           waitingForEditor
+               Print a message to the terminal whenever Git is waiting for editor input from the user.
+
+           nestedTag
+               Advice shown if a user attempts to recursively tag a tag object.
+
+           submoduleAlternateErrorStrategyDie
+               Advice shown when a submodule.alternateErrorStrategy option configured to "die" causes a fatal error.
+
+           submodulesNotUpdated
+               Advice shown when a user runs a submodule command that fails because git submodule update --init was not run.
+
+           addIgnoredFile
+               Advice shown if a user attempts to add an ignored file to the index.
+
+           addEmptyPathspec
+               Advice shown if a user runs the add command without providing the pathspec parameter.
+
+           updateSparsePath
+               Advice shown when either git-add(1) or git-rm(1) is asked to update index entries outside the current sparse checkout.
+
+           diverging
+               Advice shown when a fast-forward is not possible.
+
+           worktreeAddOrphan
+               Advice shown when a user tries to create a worktree from an invalid reference, to instruct how to create a new orphan branch instead.
+
+               attr.tree
+           A reference to a tree in the repository from which to read attributes, instead of the .gitattributes file in the working tree. In a bare repository, this defaults to HEAD:.gitattributes. If the value does
+           not resolve to a valid tree object, an empty tree is used instead. When the GIT_ATTR_SOURCE environment variable or --attr-source command line option are used, this configuration variable has no effect.
+
+       core.fileMode
+           Tells Git if the executable bit of files in the working tree is to be honored.
+
+           Some filesystems lose the executable bit when a file that is marked as executable is checked out, or checks out a non-executable file with executable bit on.  git-clone(1) or git-init(1) probe the
+           filesystem to see if it handles the executable bit correctly and this variable is automatically set as necessary.
+
+           A repository, however, may be on a filesystem that handles the filemode correctly, and this variable is set to true when created, but later may be made accessible from another environment that loses the
+           filemode (e.g. exporting ext4 via CIFS mount, visiting a Cygwin created repository with Git for Windows or Eclipse). In such a case it may be necessary to set this variable to false. See git-update-
+           index(1).
+
+           The default is true (when core.filemode is not specified in the config file).
+
+       core.hideDotFiles
+           (Windows-only) If true, mark newly-created directories and files whose name starts with a dot as hidden. If dotGitOnly, only the .git/ directory is hidden, but no other files starting with a dot. The
+           default mode is dotGitOnly.
+
+       core.ignoreCase
+           Internal variable which enables various workarounds to enable Git to work better on filesystems that are not case sensitive, like APFS, HFS+, FAT, NTFS, etc. For example, if a directory listing finds
+           "makefile" when Git expects "Makefile", Git will assume it is really the same file, and continue to remember it as "Makefile".
+
+           The default is false, except git-clone(1) or git-init(1) will probe and set core.ignoreCase true if appropriate when the repository is created.
+
+           Git relies on the proper configuration of this variable for your operating and file system. Modifying this value may result in unexpected behavior.
+
+       core.precomposeUnicode
+           This option is only used by Mac OS implementation of Git. When core.precomposeUnicode=true, Git reverts the unicode decomposition of filenames done by Mac OS. This is useful when sharing a repository
+           between Mac OS and Linux or Windows. (Git for Windows 1.7.10 or higher is needed, or Git under cygwin 1.7). When false, file names are handled fully transparent by Git, which is backward compatible with
+           older versions of Git.
+
+       core.protectHFS
+           If set to true, do not allow checkout of paths that would be considered equivalent to .git on an HFS+ filesystem. Defaults to true on Mac OS, and false elsewhere.
+
+       core.protectNTFS
+           If set to true, do not allow checkout of paths that would cause problems with the NTFS filesystem, e.g. conflict with 8.3 "short" names. Defaults to true on Windows, and false elsewhere.
+
+       core.fsmonitor
+           If set to true, enable the built-in file system monitor daemon for this working directory (git-fsmonitor--daemon(1)).

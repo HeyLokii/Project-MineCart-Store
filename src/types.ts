@@ -2,12 +2,20 @@
 export * from '@shared/schema';
 
 // Extended types for frontend use
-import type { CartItem as BaseCartItem, Product, Favorite as BaseFavorite } from '@shared/schema';
+import type { Product } from '@shared/schema';
 
-export interface CartItem extends BaseCartItem {
+export interface ExtendedCartItem {
+  id?: string;
+  userId?: string;
+  productId: string;
   product?: Product | null;
+  quantity: number;
 }
 
-export interface Favorite extends BaseFavorite {
+export interface ExtendedFavorite {
+  id: string;
+  userId: string;
+  productId: string;
   product?: Product | null;
+  createdAt: Date;
 }

@@ -15,6 +15,7 @@ export const UserSchema = z.object({
   youtubeUrl: z.string().optional(),
   twitterUrl: z.string().optional(),
   instagramUrl: z.string().optional(),
+  firebaseUid: z.string().optional(),
   createdAt: z.date(),
   updatedAt: z.date()
 });
@@ -33,6 +34,21 @@ export const ProductSchema = z.object({
   tags: z.array(z.string()).default([]),
   ratings: z.number().default(0),
   downloads: z.number().default(0),
+  downloadCount: z.number().default(0),
+  mainImageIndex: z.number().default(0),
+  isActive: z.boolean().default(true),
+  isFeatured: z.boolean().default(false),
+  fileType: z.string().optional(),
+  discount: z.number().default(0),
+  youtubeVideoId: z.string().optional(),
+  compatibility: z.array(z.string()).default([]),
+  features: z.array(z.string()).default([]),
+  fileName: z.string().optional(),
+  fileSize: z.string().optional(),
+  modelUrl: z.string().optional(),
+  originalPrice: z.number().optional(),
+  sellerId: z.string().optional(),
+  rating: z.number().default(0),
   createdAt: z.date(),
   updatedAt: z.date()
 });
@@ -60,6 +76,7 @@ export const ReviewSchema = z.object({
   userId: z.string(),
   rating: z.number().min(1).max(5),
   comment: z.string(),
+  helpfulCount: z.number().default(0),
   createdAt: z.date(),
   updatedAt: z.date()
 });
@@ -71,17 +88,37 @@ export const AdvertisementSchema = z.object({
   description: z.string(),
   imageUrl: z.string(),
   link: z.string(),
+  linkUrl: z.string().optional(),
   isActive: z.boolean().default(true),
+  position: z.number().default(0),
+  priority: z.number().default(0),
+  startDate: z.date().optional(),
+  endDate: z.date().optional(),
   createdAt: z.date(),
   updatedAt: z.date()
 });
 
 // Cart Item schema
 export const CartItemSchema = z.object({
+  id: z.string().optional(),
+  userId: z.string().optional(),
   productId: z.string(),
-  product: ProductSchema,
+  product: ProductSchema.optional(),
   quantity: z.number().default(1)
 });
+
+// Favorite schema
+export const FavoriteSchema = z.object({
+  id: z.string(),
+  userId: z.string(),
+  productId: z.string(),
+  createdAt: z.date()
+});
+
+// Insert schemas for database operations
+export const InsertProductSchema = ProductSchema.omit({ id: true, createdAt: true, updatedAt: true });
+export const InsertUserSchema = UserSchema.omit({ id: true, createdAt: true, updatedAt: true });
+export const InsertOrderSchema = OrderSchema.omit({ id: true, createdAt: true, updatedAt: true });
 
 // Notification schema
 export const NotificationSchema = z.object({
@@ -102,3 +139,9 @@ export type Review = z.infer<typeof ReviewSchema>;
 export type Advertisement = z.infer<typeof AdvertisementSchema>;
 export type CartItem = z.infer<typeof CartItemSchema>;
 export type Notification = z.infer<typeof NotificationSchema>;
+export type Favorite = z.infer<typeof FavoriteSchema>;
+
+// Insert types
+export type InsertProduct = z.infer<typeof InsertProductSchema>;
+export type InsertUser = z.infer<typeof InsertUserSchema>;
+export type InsertOrder = z.infer<typeof InsertOrderSchema>;

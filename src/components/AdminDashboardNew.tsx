@@ -14,7 +14,7 @@ import { useProducts } from '@/hooks/useProducts';
 import { Link } from 'wouter';
 import ActivityFeed from './ActivityFeed';
 import { useQueryClient } from '@tanstack/react-query';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/hooks/use-toast';
 
 interface ProductFormData {
   name: string;
