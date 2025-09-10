@@ -2,32 +2,51 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, signOut, onAuthStateChanged } from "firebase/auth";
 
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: `${import.meta.env.VITE_FIREBASE_PROJECT_ID}.firebaseapp.com`,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: `${import.meta.env.VITE_FIREBASE_PROJECT_ID}.appspot.com`,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "123456789",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-};
+// Verificar se Firebase está configurado
+const isFirebaseConfigured = import.meta.env.VITE_FIREBASE_API_KEY && 
+                              import.meta.env.VITE_FIREBASE_PROJECT_ID;
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+let app: any = null;
+
+if (isFirebaseConfigured) {
+  const firebaseConfig = {
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
+  };
+
+  // Initialize Firebase
+  app = initializeApp(firebaseConfig);
+} else {
+  console.warn('⚠️ Firebase não configurado - recursos de autenticação desabilitados');
+}
 
 // Initialize Firebase Authentication and get a reference to the service
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
+export const auth = app ? getAuth(app) : null;
+export const googleProvider = app ? new GoogleAuthProvider() : null;
 
 // Set custom parameters for Google Auth
-googleProvider.setCustomParameters({
-  prompt: 'select_account'
-});
+if (googleProvider) {
+  googleProvider.setCustomParameters({
+    prompt: 'select_account'
+  });
+}
 
 // Google Sign In Functions - usar apenas popup, mais confiável
 export async function signInWithGoogle() {
+  if (!auth || !googleProvider) {
+    throw new Error('Firebase não configurado - login indisponível');
+  }
+
   try {
     // Limpar qualquer estado anterior
-    localStorage.removeItem('firebase:redirectUser:' + firebaseConfig.apiKey + ':' + firebaseConfig.authDomain);
+    const apiKey = import.meta.env.VITE_FIREBASE_API_KEY;
+    const authDomain = import.meta.env.VITE_FIREBASE_AUTH_DOMAIN;
+    localStorage.removeItem('firebase:redirectUser:' + apiKey + ':' + authDomain);
     sessionStorage.clear();
     
     // Usar apenas popup - mais confiável
@@ -55,6 +74,10 @@ export async function signInWithGoogle() {
 
 // Handle redirect result
 export async function handleRedirectResult() {
+  if (!auth) {
+    return null;
+  }
+
   try {
     const result = await getRedirectResult(auth);
     return result;
@@ -66,11 +89,18 @@ export async function handleRedirectResult() {
 
 // Sign out
 export async function signOutUser() {
+  if (!auth) {
+    return;
+  }
   await signOut(auth);
 }
 
 // Auth state observer
 export function onAuthChange(callback: (user: any) => void) {
+  if (!auth) {
+    callback(null);
+    return () => {};
+  }
   return onAuthStateChanged(auth, callback);
 }
 

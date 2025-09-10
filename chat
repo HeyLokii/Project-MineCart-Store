@@ -1,82 +1,39 @@
-Esse erro da Vercel é claro: ela rodou npm install, mas não existe package.json no diretório raiz do build:npm error enoent Could not read package.json: ENOENT: no such file or directory, open '/vercel/path0/package.json'
+dicione o Firebase ao seu aplicativo da web
+Completed
+Registrar aplicativo
+2
+Adicionar Firebase SDK
 
-Ou seja, o projeto que você apontou para a Vercel não é um app Node/React (no root), ou o Root Directory está errado.
+Use npm
 
-Você tem 3 jeitos de resolver — escolha o que bate com o seu objetivo:
+Use uma tag <script>
+Se você já estiver usando o npm e um empacotador de módulos, como o webpack ou o Rollup , poderá executar o seguinte comando para instalar o SDK mais recente ( Saiba mais ):
 
-✅ Opção 1 — Só servir arquivos (estático) para o Payhip
+npm instalar firebase
+Em seguida, inicialize o Firebase e comece a usar os SDKs para os produtos que você gostaria de usar.
 
-Se você quer a Vercel só para hospedar arquivos estáticos (CSS/JS) e não precisa de build:
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-Crie um index.html mínimo na raiz do repo (a Vercel exige um entry point):<!-- index.html -->
-<!doctype html>
-<html lang="pt-BR"><meta charset="utf-8"><title>MineCart Assets</title>
-<body><h1>MineCart Store Assets</h1><p>Arquivos de integração com Payhip.</p></body>
-</html>
-Garanta sua pasta de assets (ex.: public/…) já versionada.
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAf2Li7xXh30EUjMAjgZjGogkMWzr9SNaA",
+  authDomain: "minecartstore.firebaseapp.com",
+  projectId: "minecartstore",
+  storageBucket: "minecartstore.firebasestorage.app",
+  messagingSenderId: "891786982150",
+  appId: "1:891786982150:web:f52ae4391e8bc927c76487",
+  measurementId: "G-RR7F9G54RP"
+};
 
-Vercel Settings → Build & Output
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+Observação: esta opção usa o SDK JavaScript modular , que fornece tamanho de SDK reduzido.
 
-Framework Preset: Other (ou “Static”)
+Saiba mais sobre o Firebase para a Web: Introdução , Referência da API do Web SDK , Amostras
 
-Build Command: None
-
-Output Directory: / (raiz) ou a pasta onde está o index.html
-
-Deploy novamente.
-
-Dica: se você só precisa de https://…/assets/... pro Payhip, o Render já faz isso; Vercel é opcional.
-
-✅ Opção 2 — App em subpasta (Vite/React/Next)
-
-Se o seu projeto com package.json está numa subpasta (ex.: site/ ou frontend/):
-
-Na Vercel → Project → Settings → General → Root Directory
-
-Coloque a subpasta que contém o package.json (ex.: site).
-
-Build & Output:
-
-Framework: Vite (se for Vite) ou Next.js (se for Next)
-
-Build Command: npm run build
-
-Output Directory: dist (Vite) ou .vercel/output (Next usa automático)
-
-Se for Vite SPA com rotas, adicione um vercel.json nessa subpasta:
-
-{
-  "routes": [
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
-}
-
-
-Deploy novamente.
-
-✅ Opção 3 — Continuar só com o Render (recomendado para Payhip)
-
-Seu fluxo atual (Payhip → carrega https://minecart-store.onrender.com/assets/...) já funciona.
-Se a Vercel é só pra “mais um lugar” de servir arquivos, simplifique e use apenas o Render (menos chance de erro).
-
-Checklist rápido (pra descobrir o que está errado agora)
-
-No VSCode/terminal, na pasta do repo:
-
-git rev-parse --show-toplevel
-dir
-
-
-Veja se existe package.json no mesmo nível do .vercel que a Vercel está usando. Se não existe:
-
-Ou crie o index.html (Opção 1 — estático).
-
-Ou aponte Root Directory na Vercel pra subpasta correta (Opção 2).
-
-Se quiser, me diga qual é a árvore do seu repo (saída do tree ou dir /s /b), e eu te falo exatamente:
-
-qual Root Directory pôr,
-
-qual Build Command / Output setar,
-
-e se faz mais sentido ficar só no Render pra seu caso.

@@ -4,24 +4,78 @@ import { storage } from "./storage";
 import { setupUploadRoutes, handleAvatarUpload, handleProductImageUpload, handleProductFileUpload } from "./upload";
 import { UserSchema, ProductSchema, OrderSchema, ReviewSchema, AdvertisementSchema, NotificationSchema } from "../../shared/schema";
 import { z } from "zod";
-import { MercadoPagoConfig, Payment } from "mercadopago";
+import EfiPay from "sdk-node-apis-efi";
 import crypto from 'crypto';
 import { eq, desc, sql, and } from 'drizzle-orm'; // Import necessary drizzle functions
 import { db } from '../lib/db'; // Import database instance
 import type { Request, Response, NextFunction } from 'express'; // Import Express types
 
-// Configurar MercadoPago
-if (!process.env.MERCADOPAGO_ACCESS_TOKEN) {
-  console.error('MERCADOPAGO_ACCESS_TOKEN not found in environment variables');
+// Configurar EFI Bank
+const efiConfig = {
+  sandbox: process.env.EFI_SANDBOX === 'true',
+  client_id: process.env.EFI_CLIENT_ID || '',
+  client_secret: process.env.EFI_CLIENT_SECRET || '',
+  certificate: process.env.EFI_CERTIFICATE_PATH || '',
+  cert_base64: false
+};
+
+if (!efiConfig.client_id || !efiConfig.client_secret) {
+  console.error('EFI credentials not found in environment variables');
 }
 
-const client = new MercadoPagoConfig({
-  accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN || '',
-  options: {
-    timeout: 30000,
-    idempotencyKey: ''
+const efiPay = new EfiPay(efiConfig);
+
+// **FUNÇÃO AUXILIAR:** Criar pagamento PIX com EFI Bank
+const createEfiPixPayment = async (paymentData: any) => {
+  if (!efiConfig.client_id || !efiConfig.client_secret) {
+    console.log('⚠️ EFI credentials não configuradas - usando modo simulado');
+    return createSimulatedPixPayment(paymentData);
   }
-});
+
+  try {
+    const body = {
+      calendario: {
+        expiracao: 3600 // 1 hora
+      },
+      devedor: {
+        cpf: paymentData.payer?.identification?.number || "00000000000",
+        nome: paymentData.payer?.first_name || "Cliente"
+      },
+      valor: {
+        original: paymentData.transaction_amount.toFixed(2)
+      },
+      chave: process.env.EFI_PIX_KEY || efiConfig.client_id,
+      solicitacaoPagador: paymentData.description || "Pagamento MineCart Store"
+    };
+
+    const response = await efiPay.pixCreateImmediateCharge([], body);
+    
+    console.log(`✅ Cobrança PIX criada no EFI: ID=${response.txid}`);
+    
+    // Gerar QR Code
+    const qrCodeResponse = await efiPay.pixGenerateQRCode({ id: response.loc.id });
+    
+    return {
+      id: response.txid,
+      status: 'pending',
+      status_detail: 'pending_waiting_payment',
+      point_of_interaction: {
+        transaction_data: {
+          qr_code: qrCodeResponse.qrcode,
+          qr_code_base64: qrCodeResponse.imagemQrcode
+        }
+      },
+      date_of_expiration: new Date(Date.now() + 3600 * 1000).toISOString(),
+      transaction_amount: paymentData.transaction_amount,
+      description: paymentData.description
+    };
+
+  } catch (error) {
+    console.error('❌ Erro ao criar cobrança PIX no EFI:', error);
+    console.log('🔄 Alternando para modo simulado...');
+    return createSimulatedPixPayment(paymentData);
+  }
+};
 
 // **FUNÇÃO AUXILIAR:** Criar pagamento PIX simulado funcional
 const createSimulatedPixPayment = (paymentData: any) => {
@@ -47,7 +101,47 @@ const createSimulatedPixPayment = (paymentData: any) => {
   };
 };
 
-// **NOVA FUNÇÃO:** Integração real com API do Mercado Pago
+// **FUNÇÃO:** Verificar status do pagamento EFI Bank
+const checkEfiPaymentStatus = async (paymentId: string) => {
+  const isSimulated = paymentId.startsWith('sim_');
+  
+  if (isSimulated || !efiConfig.client_id) {
+    if (isSimulated) {
+      const timestamp = parseInt(paymentId.split('_')[1]);
+      const paymentAge = Date.now() - timestamp;
+      const shouldApprove = paymentAge > 30000;
+      
+      return {
+        id: paymentId,
+        status: shouldApprove ? 'approved' : 'pending',
+        status_detail: shouldApprove ? 'accredited' : 'pending_waiting_payment',
+        payment_method: 'pix'
+      };
+    }
+  }
+
+  try {
+    const response = await efiPay.pixDetailCharge({ txid: paymentId });
+    
+    return {
+      id: paymentId,
+      status: response.status === 'CONCLUIDA' ? 'approved' : 'pending',
+      status_detail: response.status === 'CONCLUIDA' ? 'accredited' : 'pending_waiting_payment',
+      payment_method: 'pix'
+    };
+    
+  } catch (error) {
+    console.error('❌ Erro ao consultar EFI:', error);
+    return {
+      id: paymentId,
+      status: 'pending',
+      status_detail: 'pending_waiting_payment',
+      payment_method: 'pix'
+    };
+  }
+};
+
+// **FUNÇÃO:** Criar pagamento PIX (agora usando EFI Bank)
 const createMercadoPagoPixPayment = async (paymentData: {
   transaction_amount: number;
   description: string;
@@ -60,119 +154,14 @@ const createMercadoPagoPixPayment = async (paymentData: {
     };
   };
 }) => {
-  const accessToken = process.env.MERCADOPAGO_ACCESS_TOKEN;
-
-  if (!accessToken) {
-    console.log('⚠️ MERCADOPAGO_ACCESS_TOKEN não configurado - usando modo simulado funcional');
-    return createSimulatedPixPayment(paymentData);
-  }
-
-  try {
-    const response = await fetch('https://api.mercadopago.com/v1/payments', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
-        'X-Idempotency-Key': `pix_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-      },
-      body: JSON.stringify(paymentData)
-    });
-
-    if (!response.ok) {
-      const errorData = await response.text();
-      console.error('❌ Erro API Mercado Pago:', response.status, errorData);
-      throw new Error(`Erro na API do Mercado Pago: ${response.status}`);
-    }
-
-    const data = await response.json();
-    console.log(`✅ Pagamento PIX criado no MP: ID=${data.id}, Status=${data.status}`);
-    return data;
-
-  } catch (error) {
-    console.error('❌ Erro ao conectar com Mercado Pago:', error);
-    console.log('🔄 Alternando para modo simulado funcional...');
-    return createSimulatedPixPayment(paymentData);
-  }
+  // Redirecionar para EFI Bank
+  return createEfiPixPayment(paymentData);
 };
 
-// **NOVA FUNÇÃO:** Verificar status do pagamento via API do Mercado Pago
+// **FUNÇÃO:** Verificar status do pagamento (agora usando EFI Bank)
 const checkMercadoPagoPaymentStatus = async (paymentId: string) => {
-  const accessToken = process.env.MERCADOPAGO_ACCESS_TOKEN;
-
-  // Verificar se é pagamento simulado (sem API do Mercado Pago)
-  const isSimulated = paymentId.startsWith('sim_');
-
-  if (!accessToken || isSimulated) {
-    console.log('⚠️ MERCADOPAGO_ACCESS_TOKEN não configurado ou pagamento simulado - usando modo demonstração');
-
-    if (isSimulated) {
-      const timestamp = parseInt(paymentId.split('_')[1]);
-      const paymentAge = Date.now() - timestamp;
-      const shouldApprove = paymentAge > 30000; // 30 segundos para demonstração
-
-      console.log(`🔍 Pagamento simulado ${paymentId}: idade=${Math.floor(paymentAge/1000)}s, aprova=${shouldApprove}`);
-
-      return {
-        id: paymentId,
-        status: shouldApprove ? 'approved' : 'pending',
-        status_detail: shouldApprove ? 'accredited' : 'pending_waiting_payment',
-        payment_method: 'pix'
-      };
-    }
-
-    return {
-      id: paymentId,
-      status: 'pending',
-      status_detail: 'pending_waiting_payment',
-      payment_method: 'pix'
-    };
-  }
-
-  // **NOVO:** Para ambiente de desenvolvimento, aprovar automaticamente após 30 segundos
-  const isDevelopment = process.env.NODE_ENV === 'development';
-  if (isDevelopment) {
-    // Extrair timestamp do ID do pagamento se for formato timestamp
-    let paymentAge = 0;
-    if (/^\d+$/.test(paymentId)) {
-      paymentAge = Date.now() - parseInt(paymentId);
-    }
-
-    if (paymentAge > 30000) { // 30 segundos
-      console.log(`🎉 AUTO-APROVAÇÃO (DEV): Pagamento ${paymentId} aprovado automaticamente após ${Math.floor(paymentAge/1000)}s`);
-      return {
-        id: paymentId,
-        status: 'approved',
-        status_detail: 'accredited',
-        payment_method: 'pix'
-      };
-    }
-  }
-
-  try {
-    const response = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,
-        'Content-Type': 'application/json'
-      }
-    });
-
-    if (!response.ok) {
-      console.error(`❌ Erro ao verificar pagamento ${paymentId}: ${response.status}`);
-      return { id: paymentId, status: 'pending', status_detail: 'pending_waiting_payment' };
-    }
-
-    const data = await response.json();
-    return {
-      id: data.id,
-      status: data.status,
-      status_detail: data.status_detail
-    };
-
-  } catch (error) {
-    console.error('❌ Erro ao verificar status do pagamento:', error);
-    return { id: paymentId, status: 'pending', status_detail: 'pending_waiting_payment' };
-  }
+  // Redirecionar para EFI Bank
+  return checkEfiPaymentStatus(paymentId);
 };
 
 export async function registerRoutes(app: Express): Promise<Server> {
