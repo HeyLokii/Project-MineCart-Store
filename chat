@@ -1,39 +1,89 @@
-dicione o Firebase ao seu aplicativo da web
-Completed
-Registrar aplicativo
-2
-Adicionar Firebase SDK
+Parece que você está “commitando” localmente mas não está empurrando para o lugar certo (ou nem está olhando a branch certa no GitHub). Bora checar e corrigir em 2 min.
 
-Use npm
+Passo-a-passo de diagnóstico (cole e rode na raiz do projeto)
+# 1) Onde você está de verdade?
+pwd
+git rev-parse --show-toplevel
 
-Use uma tag <script>
-Se você já estiver usando o npm e um empacotador de módulos, como o webpack ou o Rollup , poderá executar o seguinte comando para instalar o SDK mais recente ( Saiba mais ):
+# 2) Qual é a branch atual?
+git branch --show-current
 
-npm instalar firebase
-Em seguida, inicialize o Firebase e comece a usar os SDKs para os produtos que você gostaria de usar.
+# 3) O que o Git acha que mudou?
+git status
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+# 4) Qual é o remote configurado?
+git remote -v
+git config --get remote.origin.url
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyAf2Li7xXh30EUjMAjgZjGogkMWzr9SNaA",
-  authDomain: "minecartstore.firebaseapp.com",
-  projectId: "minecartstore",
-  storageBucket: "minecartstore.firebasestorage.app",
-  messagingSenderId: "891786982150",
-  appId: "1:891786982150:web:f52ae4391e8bc927c76487",
-  measurementId: "G-RR7F9G54RP"
-};
+# 5) Commits recentes (local vs remoto)
+git log --oneline -5
+git ls-remote --heads origin
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-Observação: esta opção usa o SDK JavaScript modular , que fornece tamanho de SDK reduzido.
+Interprete rápido
 
-Saiba mais sobre o Firebase para a Web: Introdução , Referência da API do Web SDK , Amostras
+Se git rev-parse --show-toplevel não aponta pra a pasta que você acha, você está no diretório errado.
 
+Se git branch --show-current não é main, você está em outra branch.
+
+Se git remote -v não mostra HeyLokii/Project-MineCart-Store.git, você está pushando pra outro repo.
+
+Se git ls-remote --heads origin não lista refs/heads/main, a branch main pode não existir no remoto ainda.
+
+Corrigir os cenários mais comuns
+A) Estou na main e o remote está correto
+git add .
+git commit -m "Força redeploy"
+git push -u origin main
+
+
+No GitHub, confira se está vendo a branch main no dropdown de branches.
+
+B) Remote errado (empurrando pro repo errado)
+git remote set-url origin https://github.com/HeyLokii/Project-MineCart-Store.git
+# ou, se usa SSH:
+# git remote set-url origin git@github.com:HeyLokii/Project-MineCart-Store.git
+
+git push -u origin main
+
+C) A branch main não existe no remoto ainda
+git push -u origin main
+
+
+Isso cria a main no GitHub e define upstream.
+
+D) Push rejeitado (divergência)
+git pull --rebase origin main
+git push -u origin main
+
+E) Você está na pasta errada
+
+Saia do clone duplicado e vá para o repo “certo” (o que tem .git configurado pro seu remoto):
+
+cd C:\Users\heylo\Project-MineCart-Store-1
+# ou para a pasta que "git rev-parse --show-toplevel" indicou
+
+Depois do push: redeploy na Vercel
+
+Se o projeto da Vercel está apontado para branch main:
+
+a cada git push origin main ela deve buildar; ou
+
+forçar pelo Dashboard: Project → Deployments → Deploy Latest / Redeploy.
+
+Se a Vercel estiver configurada para outra branch (ex. backend), mude em Project → Settings → Git → Production Branch → main.
+
+Checklist express
+
+ Estou no diretório certo (git rev-parse --show-toplevel)
+
+ Branch correta (main)
+
+ Remote correto (origin → HeyLokii/Project-MineCart-Store.git)
+
+ git push -u origin main concluiu sem erro
+
+ No GitHub, estou vendo a branch main
+
+ Na Vercel, Production Branch = main
+
+ Fiz Redeploy (se necessário)
