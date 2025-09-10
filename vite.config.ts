@@ -17,7 +17,7 @@ export default defineConfig({
     rollupOptions: {
       input: path.resolve(import.meta.dirname, "public", "index.html")
     },
-    outDir: path.resolve(import.meta.dirname, "dist", "public"),
+    outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
   },
   server: {

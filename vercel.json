@@ -1,25 +1,20 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "installCommand": "npm install",
-  "devCommand": "npm run dev",
-  "env": {
-    "NODE_ENV": "production"
-  },
+  "outputDirectory": "dist/public",
   "functions": {
-    "dist/index.js": {
+    "src/server/index.ts": {
       "runtime": "nodejs20.x"
     }
   },
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/dist/index.js"
+      "src": "/api/(.*)",
+      "dest": "/src/server/index.ts"
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "/(.*)",
+      "dest": "/dist/public/$1"
     }
   ]
 }
