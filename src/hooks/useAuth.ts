@@ -144,6 +144,13 @@ export const useAuth = () => {
     authListenerSet = true;
     let timeoutId: NodeJS.Timeout;
 
+    // Check if Firebase auth is available
+    if (!auth) {
+      console.warn('⚠️ Firebase auth não disponível - usando modo offline');
+      setLoading(false);
+      return;
+    }
+
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       // Update global state
       globalUser = firebaseUser;
@@ -193,6 +200,10 @@ export const useAuth = () => {
   }, [checkUserProfileStatus]); // Added checkUserProfileStatus as dependency
 
   const login = async () => {
+    if (!auth) {
+      throw new Error('Firebase não configurado - login indisponível');
+    }
+
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
@@ -208,6 +219,14 @@ export const useAuth = () => {
   };
 
   const logout = useCallback(async () => {
+    if (!auth) {
+      console.warn('⚠️ Firebase auth não disponível - logout simulado');
+      setUser(null);
+      setUserProfile(null);
+      setSuspensionData(null);
+      return;
+    }
+
     setLoading(true);
     try {
       await signOut(auth);
