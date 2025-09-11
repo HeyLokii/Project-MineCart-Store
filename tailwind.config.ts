@@ -2,7 +2,20 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+  safelist: [
+    'bg-dark-safe',
+    'bg-medium-gray', 
+    'bg-light-gray',
+    'text-primary-orange',
+    'text-accent-yellow',
+    'text-light-safe',
+    'border-highlight',
+    'bg-primary-orange',
+    'bg-accent-yellow',
+    'bg-secondary-teal',
+    'transition-smooth'
+  ],
   theme: {
     extend: {
       borderRadius: {
@@ -61,6 +74,20 @@ export default {
           border: "var(--sidebar-border)",
           ring: "var(--sidebar-ring)",
         },
+        // Cores customizadas do MineCart
+        "primary-orange": "var(--laranja-principal)",
+        "laranja-alternativo": "var(--laranja-alternativo)", 
+        "accent-yellow": "var(--amarelo-detalhes)",
+        "dark-safe": "var(--cinza-escuro)",
+        "medium-gray": "var(--cinza-medio)",
+        "light-gray": "var(--cinza-claro)",
+        "light-safe": "#F3F4F6",
+        "secondary-teal": "var(--verde-petroleo)",
+        "highlight": "var(--laranja-principal)",
+      },
+      backgroundImage: {
+        'minecraft-gradient': 'linear-gradient(135deg, var(--laranja-principal), var(--verde-petroleo))',
+        'dark-gradient': 'linear-gradient(135deg, #1f2937, #111827)',
       },
       keyframes: {
         "accordion-down": {
@@ -83,6 +110,9 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      transitionProperty: {
+        'smooth': 'all',
       },
     },
   },
