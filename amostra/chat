@@ -1,0 +1,19 @@
+index-Dwry7HOx.js:1467 ⚠️ Firebase não configurado - recursos de autenticação desabilitados
+(anonymous) @ index-Dwry7HOx.js:1467Understand this warning
+index-Dwry7HOx.js:40 TypeError: Cannot read properties of null (reading 'onAuthStateChanged')
+    at DD (index-Dwry7HOx.js:1302:973)
+    at index-Dwry7HOx.js:1467:1647
+    at Fd (index-Dwry7HOx.js:40:24272)
+    at Jo (index-Dwry7HOx.js:40:42382)
+    at index-Dwry7HOx.js:40:40700
+    at E (index-Dwry7HOx.js:25:1582)
+    at MessagePort.C (index-Dwry7HOx.js:25:1950)
+cm @ index-Dwry7HOx.js:40Understand this error
+index-Dwry7HOx.js:38 Uncaught TypeError: Cannot read properties of null (reading 'onAuthStateChanged')
+    at DD (index-Dwry7HOx.js:1302:973)
+    at index-Dwry7HOx.js:1467:1647
+    at Fd (index-Dwry7HOx.js:40:24272)
+    at Jo (index-Dwry7HOx.js:40:42382)
+    at index-Dwry7HOx.js:40:40700
+    at E (index-Dwry7HOx.js:25:1582)
+    at MessagePort.C (index-Dwry7HOx.js:25:1950)
