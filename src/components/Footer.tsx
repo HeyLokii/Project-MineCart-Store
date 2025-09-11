@@ -1,6 +1,6 @@
 import { useLocation, Link } from 'wouter';
 import { useQuery } from '@tanstack/react-query';
-import { MessageCircle, Twitter, Youtube, Linkedin } from 'lucide-react';
+import { MessageCircle, Instagram, Youtube, Linkedin } from 'lucide-react';
 
 interface SiteSetting {
   id: number;
@@ -60,14 +60,14 @@ export default function Footer() {
 
   const socialLinks = [
     { name: 'Discord', icon: MessageCircle, href: getSetting('social_discord') },
-    { name: 'Gorjeto', icon: Twitter, href: getSetting('social_twitter') },
+    { name: 'Instagram', icon: Instagram, href: getSetting('social_instagram') },
     { name: 'YouTube', icon: Youtube, href: getSetting('social_youtube') },
     { name: 'Linkedin', icon: Linkedin, href: getSetting('social_linkedin') },
   ];
 
   return (
     <footer className="border-t header-dark">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-3">
             <div className="logo-container">
@@ -131,7 +131,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom section */}
-        <div className="border-t border-gray-600 pt-8 mt-8">
+        <div className="border-t border-gray-600 pt-4 mt-6">
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <p className="text-xs text-light-safe opacity-70">
               © 2024 MineCart Store. Todos os direitos reservados.
