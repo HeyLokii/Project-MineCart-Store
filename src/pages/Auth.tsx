@@ -105,17 +105,30 @@ export default function Auth() {
   const handleGoogleSignIn = async () => {
     try {
       setLoading(true);
+      
+      // Check if Firebase is configured
+      if (!auth) {
+        alert('🔧 Firebase não configurado no ambiente de produção. Por favor, configure as variáveis de ambiente no Vercel para habilitar o login com Google.');
+        setLoading(false);
+        return;
+      }
+      
       const result = await signInWithGoogle();
       if (result?.user) {
-        // Login bem sucedido
         console.log('Login Google realizado com sucesso!');
         window.location.href = '/';
       }
     } catch (error: any) {
       console.error('Erro no login Google:', error);
-
-      // Mostrar mensagem de erro mais específica
-      const errorMessage = error.message || 'Erro ao fazer login com Google. Tente novamente.';
+      
+      let errorMessage = 'Erro ao fazer login com Google. Tente novamente.';
+      
+      if (error.message?.includes('não configurado')) {
+        errorMessage = '🔧 Sistema de autenticação não configurado. Entre em contato com o suporte.';
+      } else if (error.message?.includes('popup')) {
+        errorMessage = '❌ Popup bloqueado pelo navegador. Permita popups e tente novamente.';
+      }
+      
       alert(errorMessage);
       setLoading(false);
     }
@@ -126,8 +139,14 @@ export default function Auth() {
     setLoading(true);
 
     try {
+      // Check if Firebase is configured
+      if (!auth) {
+        alert('🔧 Firebase não configurado. Por favor, configure as variáveis de ambiente.');
+        setLoading(false);
+        return;
+      }
+      
       if (isLogin) {
-        // Login with email/password
         await signInWithEmailAndPassword(auth, formData.email, formData.password);
         setLocation('/');
       } else {
@@ -256,7 +275,7 @@ export default function Auth() {
             variant="outline"
             className="w-full h-12 border-gray-300 hover:bg-gray-50 transition-smooth text-dark-safe"
             onClick={handleGoogleSignIn}
-            disabled={loading}
+            disabled={loading || !auth}
           >
             <svg className="mr-3 h-5 w-5" viewBox="0 0 24 24">
               <path

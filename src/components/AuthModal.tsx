@@ -87,13 +87,28 @@ export default function AuthModal({ show, onClose }: AuthModalProps) {
   const handleGoogleSignIn = async () => {
     try {
       setLoading(true);
+      
+      // Check if Firebase is configured
+      if (!auth) {
+        alert('🔧 Firebase não configurado no ambiente de produção. Por favor, configure as variáveis de ambiente no Vercel para habilitar o login com Google.');
+        setLoading(false);
+        return;
+      }
+      
       const result = await signInWithGoogle();
       if (result?.user) {
         onClose();
       }
     } catch (error: any) {
       console.error('Erro no login Google:', error);
-      const errorMessage = error.message || 'Erro ao fazer login com Google. Tente novamente.';
+      let errorMessage = 'Erro ao fazer login com Google. Tente novamente.';
+      
+      if (error.message?.includes('não configurado')) {
+        errorMessage = '🔧 Sistema de autenticação não configurado. Entre em contato com o suporte.';
+      } else if (error.message?.includes('popup')) {
+        errorMessage = '❌ Popup bloqueado pelo navegador. Permita popups e tente novamente.';
+      }
+      
       alert(errorMessage);
       setLoading(false);
     }
@@ -104,6 +119,13 @@ export default function AuthModal({ show, onClose }: AuthModalProps) {
     setLoading(true);
 
     try {
+      // Check if Firebase is configured
+      if (!auth) {
+        alert('🔧 Firebase não configurado. Por favor, configure as variáveis de ambiente.');
+        setLoading(false);
+        return;
+      }
+      
       if (isLogin) {
         await signInWithEmailAndPassword(auth, formData.email, formData.password);
         onClose();
@@ -192,31 +214,50 @@ export default function AuthModal({ show, onClose }: AuthModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md bg-white-safe shadow-lg relative">
-        <CardHeader className="space-y-1 text-center">
+    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+      <Card className="w-full max-w-md bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700 shadow-2xl relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-orange/5 to-accent-yellow/5 opacity-50"></div>
+        
+        <CardHeader className="space-y-4 text-center relative z-10">
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-xl font-bold"
+            className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 transition-all"
           >
             ×
           </button>
-          <div className="logo-container justify-center mb-4">
-            <img 
-              src="https://i.imgur.com/5OKEMhN.png" 
-              alt="MineCart Store" 
-              className="logo-image"
-            />
-            <span className="logo-text">MineCart Store</span>
+          
+          <div className="flex items-center justify-center space-x-3 mb-6">
+            <div className="w-12 h-12 bg-gradient-to-br from-primary-orange to-accent-yellow rounded-lg flex items-center justify-center">
+              <img 
+                src="https://i.imgur.com/5OKEMhN.png" 
+                alt="MineCart Store" 
+                className="w-8 h-8 rounded-md"
+              />
+            </div>
+            <span className="text-2xl font-bold text-white">MineCart Store</span>
           </div>
-          <CardTitle className="text-2xl font-bold text-dark-safe">
-            {isLogin ? "Entrar na sua conta" : "Criar conta"}
-          </CardTitle>
-          <CardDescription className="text-muted-foreground">
-            {isLogin 
-              ? "Digite suas credenciais para acessar sua conta" 
-              : "Crie sua conta e comece a explorar"}
-          </CardDescription>
+          
+          <div className="space-y-2">
+            <CardTitle className="text-2xl font-bold text-white">
+              {isLogin ? "Entrar na sua conta" : "Criar conta"}
+            </CardTitle>
+            <CardDescription className="text-gray-300">
+              {isLogin 
+                ? "Digite suas credenciais para acessar sua conta" 
+                : "Crie sua conta e comece a explorar"}
+            </CardDescription>
+          </div>
+          
+          {/* Firebase Status Indicator */}
+          {!auth && (
+            <div className="bg-amber-900/50 border border-amber-600/50 rounded-lg p-3 text-amber-200 text-sm">
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
+                <span>⚠️ Sistema em modo de desenvolvimento</span>
+              </div>
+            </div>
+          )}
         </CardHeader>
 
         <CardContent className="space-y-6">
@@ -425,8 +466,8 @@ export default function AuthModal({ show, onClose }: AuthModalProps) {
 
             <Button
               type="submit"
-              className="w-full btn-primary"
-              disabled={loading}
+              className="w-full bg-gradient-to-r from-primary-orange to-accent-yellow hover:from-laranja-alternativo hover:to-primary-orange text-white font-semibold py-3 transition-all transform hover:scale-105"
+              disabled={loading || (!auth && !isLogin)}
             >
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {isLogin ? "Entrar" : "Criar conta"}
@@ -441,12 +482,12 @@ export default function AuthModal({ show, onClose }: AuthModalProps) {
             </div>
           )}
         </CardContent>
-        <CardFooter className="flex justify-center">
-          <p className="text-sm text-muted-foreground">
+        <CardFooter className="flex justify-center relative z-10">
+          <p className="text-sm text-gray-300">
             {isLogin ? "Não tem uma conta?" : "Já tem uma conta?"}{" "}
             <Button
               variant="link"
-              className="p-0 h-auto text-primary-orange hover:text-accent-yellow transition-smooth"
+              className="p-0 h-auto text-primary-orange hover:text-accent-yellow transition-all font-semibold"
               onClick={() => setIsLogin(!isLogin)}
             >
               {isLogin ? "Criar conta" : "Fazer login"}
