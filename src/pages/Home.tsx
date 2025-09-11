@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useLocation } from 'wouter';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -6,6 +6,7 @@ import { Search, Filter, Sparkles, Heart } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
 import ProductModal from '@/components/ProductModal';
 import AdvertisementBanner from '@/components/AdvertisementBanner';
+import Pagination from '@/components/Pagination';
 import { useProducts } from '@/hooks/useProducts';
 import { useStatistics } from '@/hooks/useStatistics';
 import { Product } from '@/types';
@@ -17,6 +18,8 @@ export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [currentPage, setCurrentPage] = useState(1);
+  const PRODUCTS_PER_PAGE = 12;
 
   const categories = [
     { id: 'all', name: 'Todos' },
@@ -27,23 +30,35 @@ export default function Home() {
     { id: 'worlds', name: 'Mundos' },
   ];
 
-  const filteredProducts = products?.filter(product => {
-    const searchLower = searchQuery.toLowerCase();
-    const matchesSearch = searchQuery === '' ||
-      product.name.toLowerCase().includes(searchLower) ||
-      product.description.toLowerCase().includes(searchLower) ||
-      product.uniqueId?.toLowerCase().includes(searchLower) ||
-      product.id.toString().includes(searchQuery);
+  const filteredProducts = useMemo(() => {
+    return products?.filter(product => {
+      const searchLower = searchQuery.toLowerCase();
+      const matchesSearch = searchQuery === '' ||
+        product.name.toLowerCase().includes(searchLower) ||
+        product.description.toLowerCase().includes(searchLower) ||
+        product.uniqueId?.toLowerCase().includes(searchLower) ||
+        product.id.toString().includes(searchQuery);
 
-    const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
+      const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
 
-    return matchesSearch && matchesCategory && product.isActive;
-  }) || [];
+      return matchesSearch && matchesCategory && product.isActive;
+    }) || [];
+  }, [products, searchQuery, selectedCategory]);
 
-  const [displayCount, setDisplayCount] = useState(8);
+  // Calcular dados de paginação
+  const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
+  const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
+  const paginatedProducts = filteredProducts.slice(startIndex, startIndex + PRODUCTS_PER_PAGE);
 
-  const handleLoadMore = () => {
-    setDisplayCount(prev => prev + 8);
+  // Reset page quando filtros mudarem
+  const handleFilterChange = (newCategory: string) => {
+    setSelectedCategory(newCategory);
+    setCurrentPage(1);
+  };
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+    setCurrentPage(1);
   };
 
   if (error) {
@@ -136,7 +151,7 @@ export default function Home() {
                 type="text"
                 placeholder="Buscar por nome, descrição ou ID..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => handleSearchChange(e.target.value)}
                 className="pl-10 bg-light-gray border-accent text-light-safe focus:border-primary-orange"
               />
               <Search className="absolute left-3 top-3 h-4 w-4 text-accent-yellow" />
@@ -148,7 +163,7 @@ export default function Home() {
                 <Button
                   key={category.id}
                   variant={selectedCategory === category.id ? 'default' : 'outline'}
-                  onClick={() => setSelectedCategory(category.id)}
+                  onClick={() => handleFilterChange(category.id)}
                   className={selectedCategory === category.id
                     ? 'bg-primary-orange hover:bg-laranja-alternativo text-white border-highlight'
                     : 'border-accent text-accent-yellow hover:bg-accent hover:text-dark-safe'
@@ -190,33 +205,38 @@ export default function Home() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredProducts.slice(0, displayCount).map((product, index) => (
-              <div key={product.id}>
-                <ProductCard product={product} />
-                {/* Show ad every 8 products */}
-                {(index + 1) % 8 === 0 && index < filteredProducts.slice(0, displayCount).length - 1 && (
-                  <div className="col-span-full my-6">
-                    <AdvertisementBanner position="between-products" />
-                  </div>
-                )}
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {paginatedProducts.map((product, index) => (
+                <div key={product.id}>
+                  <ProductCard product={product} />
+                  {/* Show ad every 8 products */}
+                  {(index + 1) % 8 === 0 && index < paginatedProducts.length - 1 && (
+                    <div className="col-span-full my-6">
+                      <AdvertisementBanner position="between-products" />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Informações de paginação */}
+            {filteredProducts.length > 0 && (
+              <div className="flex flex-col sm:flex-row justify-between items-center mt-8 gap-4">
+                <div className="text-sm text-light-safe">
+                  Mostrando {startIndex + 1}-{Math.min(startIndex + PRODUCTS_PER_PAGE, filteredProducts.length)} de {filteredProducts.length} produtos
+                </div>
+                
+                <Pagination 
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={setCurrentPage}
+                />
               </div>
-            ))}
-          </div>
+            )}
+          </>
         )}
 
-        {/* Load More Button */}
-        {filteredProducts.length > displayCount && (
-          <div className="text-center mt-12">
-            <Button
-              onClick={handleLoadMore}
-              className="bg-primary-orange hover:bg-laranja-alternativo text-white border-highlight"
-              size="lg"
-            >
-              Carregar Mais Produtos
-            </Button>
-          </div>
-        )}
       </main>
 
       {/* Product Modal */}

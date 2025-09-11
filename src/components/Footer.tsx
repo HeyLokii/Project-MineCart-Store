@@ -1,6 +1,6 @@
 import { useLocation, Link } from 'wouter';
 import { useQuery } from '@tanstack/react-query';
-import { MessageCircle, Instagram, Youtube, Linkedin } from 'lucide-react';
+import { MessageCircle, Instagram, Youtube, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 
 interface SiteSetting {
   id: number;
@@ -30,64 +30,78 @@ export default function Footer() {
 
   const footerSections = [
     {
-      title: 'Empresa',
+      title: 'Marketplace',
       links: [
-        { name: 'Sobre Nós', href: '/about' },
-        { name: 'Contato', href: '/contact' },
-        { name: 'Carreiras', href: '/careers' },
-        { name: 'Blogue', href: '/blog' },
-      ],
-    },
-    {
-      title: 'Legal',
-      links: [
-        { name: 'Política de Privacidade', action: () => window.dispatchEvent(new CustomEvent('show-privacy-modal')) },
-        { name: 'Termos de Serviço', action: () => window.dispatchEvent(new CustomEvent('show-terms-modal')) },
-        { name: 'Termos de Venda', href: '/sales-terms' },
-        { name: 'Licenças', href: '/licenses' },
+        { name: 'Explorar Produtos', href: '/' },
+        { name: 'Categorias', href: '/categories' },
+        { name: 'Criadores', href: '/creators' },
+        { name: 'Novidades', href: '/new' },
       ],
     },
     {
       title: 'Suporte',
       links: [
         { name: 'Central de Ajuda', href: '/help' },
-        { name: 'Perguntas Frequentes', href: '/faq' },
-        { name: 'Contato Suporte', href: '/contact' },
-        { name: 'Status do Sistema', href: '/status' },
+        { name: 'Como Comprar', href: '/how-to-buy' },
+        { name: 'FAQ', href: '/faq' },
+        { name: 'Contato', href: '/contact' },
+      ],
+    },
+    {
+      title: 'Legal',
+      links: [
+        { name: 'Termos de Uso', action: () => window.dispatchEvent(new CustomEvent('show-terms-modal')) },
+        { name: 'Privacidade', action: () => window.dispatchEvent(new CustomEvent('show-privacy-modal')) },
+        { name: 'Política de Reembolso', href: '/refund-policy' },
+        { name: 'Direitos Autorais', href: '/copyright' },
       ],
     },
   ];
 
   const socialLinks = [
-    { name: 'Discord', icon: MessageCircle, href: getSetting('social_discord') },
-    { name: 'Instagram', icon: Instagram, href: getSetting('social_instagram') },
-    { name: 'YouTube', icon: Youtube, href: getSetting('social_youtube') },
-    { name: 'Linkedin', icon: Linkedin, href: getSetting('social_linkedin') },
+    { name: 'Discord', icon: MessageCircle, href: getSetting('social_discord') || '#' },
+    { name: 'Instagram', icon: Instagram, href: getSetting('social_instagram') || '#' },
+    { name: 'YouTube', icon: Youtube, href: getSetting('social_youtube') || '#' },
+    { name: 'LinkedIn', icon: Linkedin, href: getSetting('social_linkedin') || '#' },
   ];
 
   return (
-    <footer className="border-t header-dark">
-      <div className="container mx-auto px-4 py-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="space-y-3">
-            <div className="logo-container">
+    <footer className="bg-gradient-to-b from-dark-safe to-gray-900 border-t border-gray-700">
+      {/* Main Footer Content */}
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+          {/* Brand Section - Takes more space */}
+          <div className="lg:col-span-2 space-y-4">
+            <div className="flex items-center space-x-3">
               <img 
                 src="https://i.imgur.com/5OKEMhN.png" 
                 alt="MineCart Store" 
-                className="logo-image"
+                className="w-10 h-10 rounded-lg"
               />
-              <span className="logo-text">MineCart Store</span>
+              <span className="text-2xl font-bold text-white">MineCart Store</span>
             </div>
-            <p className="text-sm text-light-safe opacity-80">
-              O melhor marketplace para conteúdo de Minecraft. Encontre skins, mapas, mods e muito mais!
+            <p className="text-light-safe text-sm leading-relaxed max-w-md">
+              O marketplace mais completo para conteúdo de Minecraft. Milhares de skins, mapas, mods e recursos criados pela comunidade para você.
             </p>
+            
+            {/* Contact Info */}
+            <div className="space-y-2">
+              <div className="flex items-center text-sm text-light-safe">
+                <Mail className="w-4 h-4 mr-2 text-accent-yellow" />
+                <span>suporte@minecartstore.com</span>
+              </div>
+              <div className="flex items-center text-sm text-light-safe">
+                <MapPin className="w-4 h-4 mr-2 text-accent-yellow" />
+                <span>Brasil, São Paulo</span>
+              </div>
+            </div>
           </div>
 
-          {/* Company Sections */}
+          {/* Navigation Sections */}
           {footerSections.map((section) => (
-            <div key={section.title}>
-              <h4 className="font-semibold text-lg mb-4 text-primary">{section.title}</h4>
-              <ul className="space-y-2">
+            <div key={section.title} className="space-y-4">
+              <h4 className="font-semibold text-white text-sm uppercase tracking-wide">{section.title}</h4>
+              <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.name}>
                     <span 
@@ -98,7 +112,7 @@ export default function Footer() {
                           setLocation(link.href);
                         }
                       }}
-                      className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer block"
+                      className="text-light-safe hover:text-accent-yellow transition-colors cursor-pointer text-sm block hover:translate-x-1 transform transition-transform duration-200"
                     >
                       {link.name}
                     </span>
@@ -107,42 +121,49 @@ export default function Footer() {
               </ul>
             </div>
           ))}
-
-          {/* Social Media */}
-          <div>
-            <h4 className="font-semibold text-lg mb-4 text-primary">Redes Sociais</h4>
-            <ul className="space-y-2">
-              {socialLinks.map((social) => {
-                const Icon = social.icon;
-                return (
-                  <li key={social.name}>
-                    <a 
-                      href={social.href}
-                      className="text-muted-foreground hover:text-foreground transition-colors flex items-center"
-                    >
-                      <Icon className="mr-2 h-4 w-4" />
-                      {social.name}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom section */}
-        <div className="border-t border-gray-600 pt-4 mt-6">
-          <div className="flex flex-col sm:flex-row justify-between items-center">
-            <p className="text-xs text-light-safe opacity-70">
-              © 2024 MineCart Store. Todos os direitos reservados.
-            </p>
-            <p className="text-xs text-light-safe opacity-70 mt-2 sm:mt-0">
-              Feito com <span className="text-accent-yellow">❤️</span> para a comunidade Minecraft
-            </p>
-          </div>
         </div>
       </div>
 
+      {/* Bottom Bar */}
+      <div className="border-t border-gray-700 bg-gray-900">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            {/* Copyright */}
+            <div className="text-center md:text-left">
+              <p className="text-xs text-gray-400">
+                © 2024 MineCart Store. Todos os direitos reservados.
+              </p>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex items-center space-x-4">
+              <span className="text-xs text-gray-400 hidden md:block">Siga-nos:</span>
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a 
+                    key={social.name}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 bg-gray-800 hover:bg-primary-orange rounded-full flex items-center justify-center transition-colors group"
+                    title={social.name}
+                  >
+                    <Icon className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
+                  </a>
+                );
+              })}
+            </div>
+
+            {/* Made with love */}
+            <div className="text-center md:text-right">
+              <p className="text-xs text-gray-400">
+                Feito com <span className="text-red-500">❤️</span> para a comunidade Minecraft
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </footer>
   );
 }

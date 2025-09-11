@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { Heart, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useFavorites } from '@/hooks/useFavorites';
 import { useAuth } from '@/hooks/useAuth';
 import ProductCard from '@/components/ProductCard';
+import Pagination from '@/components/Pagination';
 import { Link } from 'wouter';
 import { useProducts } from '@/hooks/useProducts';
 
@@ -13,6 +15,8 @@ export default function Favorites() {
   const { user } = useAuth();
   const { favorites, isLoading } = useFavorites();
   const { data: products } = useProducts();
+  const [currentPage, setCurrentPage] = useState(1);
+  const PRODUCTS_PER_PAGE = 12;
   
   // Mapear favoritos com produtos
   const favoriteProducts = Array.isArray(favorites) ? favorites
@@ -74,11 +78,37 @@ export default function Favorites() {
               </CardContent>
             </Card>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {favoriteProducts.map((product: any) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+            <>
+              {(() => {
+                const totalPages = Math.ceil(favoriteProducts.length / PRODUCTS_PER_PAGE);
+                const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
+                const paginatedProducts = favoriteProducts.slice(startIndex, startIndex + PRODUCTS_PER_PAGE);
+
+                return (
+                  <>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                      {paginatedProducts.map((product: any) => (
+                        <ProductCard key={product.id} product={product} />
+                      ))}
+                    </div>
+
+                    {favoriteProducts.length > PRODUCTS_PER_PAGE && (
+                      <div className="flex flex-col sm:flex-row justify-between items-center mt-8 gap-4">
+                        <div className="text-sm text-muted-foreground">
+                          Mostrando {startIndex + 1}-{Math.min(startIndex + PRODUCTS_PER_PAGE, favoriteProducts.length)} de {favoriteProducts.length} favoritos
+                        </div>
+                        
+                        <Pagination 
+                          currentPage={currentPage}
+                          totalPages={totalPages}
+                          onPageChange={setCurrentPage}
+                        />
+                      </div>
+                    )}
+                  </>
+                );
+              })()} 
+            </>
           )}
         </div>
       </div>
