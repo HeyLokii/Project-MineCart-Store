@@ -106,13 +106,6 @@ export default function Auth() {
     try {
       setLoading(true);
       
-      // Check if Firebase is configured
-      if (!auth) {
-        alert('🔧 Firebase não configurado no ambiente de produção. Por favor, configure as variáveis de ambiente no Vercel para habilitar o login com Google.');
-        setLoading(false);
-        return;
-      }
-      
       const result = await signInWithGoogle();
       if (result?.user) {
         console.log('Login Google realizado com sucesso!');
@@ -139,13 +132,6 @@ export default function Auth() {
     setLoading(true);
 
     try {
-      // Check if Firebase is configured
-      if (!auth) {
-        alert('🔧 Firebase não configurado. Por favor, configure as variáveis de ambiente.');
-        setLoading(false);
-        return;
-      }
-      
       if (isLogin) {
         await signInWithEmailAndPassword(auth, formData.email, formData.password);
         setLocation('/');
@@ -275,7 +261,7 @@ export default function Auth() {
             variant="outline"
             className="w-full h-12 border-gray-300 hover:bg-gray-50 transition-smooth text-dark-safe"
             onClick={handleGoogleSignIn}
-            disabled={loading || !auth}
+            disabled={loading}
           >
             <svg className="mr-3 h-5 w-5" viewBox="0 0 24 24">
               <path
