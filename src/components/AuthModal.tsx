@@ -88,13 +88,6 @@ export default function AuthModal({ show, onClose }: AuthModalProps) {
     try {
       setLoading(true);
       
-      // Check if Firebase is configured
-      if (!auth) {
-        alert('🔧 Firebase não configurado no ambiente de produção. Por favor, configure as variáveis de ambiente no Vercel para habilitar o login com Google.');
-        setLoading(false);
-        return;
-      }
-      
       const result = await signInWithGoogle();
       if (result?.user) {
         onClose();
@@ -119,12 +112,6 @@ export default function AuthModal({ show, onClose }: AuthModalProps) {
     setLoading(true);
 
     try {
-      // Check if Firebase is configured
-      if (!auth) {
-        alert('🔧 Firebase não configurado. Por favor, configure as variáveis de ambiente.');
-        setLoading(false);
-        return;
-      }
       
       if (isLogin) {
         await signInWithEmailAndPassword(auth, formData.email, formData.password);
@@ -248,16 +235,6 @@ export default function AuthModal({ show, onClose }: AuthModalProps) {
                 : "Crie sua conta e comece a explorar"}
             </CardDescription>
           </div>
-          
-          {/* Firebase Status Indicator */}
-          {!auth && (
-            <div className="bg-amber-900/50 border border-amber-600/50 rounded-lg p-3 text-amber-200 text-sm">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
-                <span>⚠️ Sistema em modo de desenvolvimento</span>
-              </div>
-            </div>
-          )}
         </CardHeader>
 
         <CardContent className="space-y-6">
@@ -467,7 +444,7 @@ export default function AuthModal({ show, onClose }: AuthModalProps) {
             <Button
               type="submit"
               className="w-full bg-gradient-to-r from-primary-orange to-accent-yellow hover:from-laranja-alternativo hover:to-primary-orange text-white font-semibold py-3 transition-all transform hover:scale-105"
-              disabled={loading || (!auth && !isLogin)}
+              disabled={loading}
             >
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {isLogin ? "Entrar" : "Criar conta"}

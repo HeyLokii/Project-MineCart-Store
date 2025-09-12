@@ -1,14 +1,21 @@
-Análise dos avisos
-O alerta “⚠️ Firebase não configurado - recursos de autenticação desabilitados” é disparado quando o arquivo src/lib/firebase.ts detecta ausência das variáveis VITE_FIREBASE_* e, por isso, não inicializa o Firebase. A função signInWithGoogle também lança erro “Firebase não configurado - login indisponível” se auth ou googleProvider forem nulos
-
-Os logs repetidos “🔍 Header - needsProfileSetup: false userProfile: null” vêm de um console.log no componente src/components/Header.tsx
-
-Como habilitar o login pelo Google
-Crie um arquivo .env na raiz do projeto com as variáveis exigidas pelo Vite/Firebase. O template .env.example lista as chaves, mas sem o prefixo VITE_ (ex.: FIREBASE_API_KEY)
-
-Renomeie/adapte as variáveis para o formato esperado pelo front‑end, conforme orientação da documentação de restauração (VITE_FIREBASE_API_KEY, VITE_FIREBASE_AUTH_DOMAIN, etc.)
-
-Depois de definir todas as credenciais corretas, reinicie o servidor de desenvolvimento; o Firebase será inicializado e a autenticação via Google estará disponível.
-
-Testing
-⚠️ Tests were not executed – read-only analysis
+        }
+        vf = !0;
+        {
+            console.warn("⚠️ Firebase auth não disponível - usando modo offline"),
+            i(!1);
+            return
+        }
+    }
+    , [p]);
+    const x = async () => {
+        throw new Error("Firebase não configurado - login indisponível")
+    }
+      , j = f.useCallback(async () => {
+        {
+            console.warn("⚠️ Firebase auth não disponível - logout simulado"),
+            t(null),
+            s(null),
+            v(null);
+            return
+        }
+    }

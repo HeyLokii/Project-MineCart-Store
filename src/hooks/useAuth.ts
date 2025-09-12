@@ -66,7 +66,6 @@ export const useAuth = () => {
 
   const checkUserProfileStatus = useCallback(async (user: FirebaseUser) => {
     if (!user?.email) {
-      console.log('❌ Sem email do usuário');
       globalUserProfile = null;
       globalNeedsProfileSetup = true;
       setUserProfile(null);
@@ -75,8 +74,6 @@ export const useAuth = () => {
     }
 
     try {
-      console.log(`🔍 Verificando perfil para: ${user.email}`);
-
       const response = await fetch(`/api/users/by-email/${encodeURIComponent(user.email)}`, {
         cache: 'no-cache',
         headers: {
@@ -87,7 +84,6 @@ export const useAuth = () => {
 
       if (response.ok) {
         const profile = await response.json();
-        console.log('✅ Perfil encontrado:', profile);
 
         // Verificar se o perfil está completo
         const isComplete = profile.isProfileComplete === true &&
@@ -98,8 +94,6 @@ export const useAuth = () => {
         // Atualizar estado global PRIMEIRO
         globalUserProfile = profile;
         globalNeedsProfileSetup = !isComplete;
-
-        console.log(`📋 Perfil completo: ${isComplete}`, profile);
 
         // Depois atualizar estado local
         setUserProfile(profile);
@@ -116,7 +110,6 @@ export const useAuth = () => {
           setSuspensionData(null);
         }
       } else {
-        console.log('❌ Perfil não encontrado');
         globalUserProfile = null;
         globalNeedsProfileSetup = true;
         setUserProfile(null);
@@ -124,7 +117,6 @@ export const useAuth = () => {
         setSuspensionData(null);
       }
     } catch (error) {
-      console.error('❌ Erro ao verificar perfil:', error);
       globalUserProfile = null;
       globalNeedsProfileSetup = true;
       setUserProfile(null);
@@ -144,12 +136,6 @@ export const useAuth = () => {
     authListenerSet = true;
     let timeoutId: NodeJS.Timeout;
 
-    // Check if Firebase auth is available
-    if (!auth) {
-      console.warn('⚠️ Firebase auth não disponível - usando modo offline');
-      setLoading(false);
-      return;
-    }
 
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       // Update global state
@@ -200,9 +186,6 @@ export const useAuth = () => {
   }, [checkUserProfileStatus]); // Added checkUserProfileStatus as dependency
 
   const login = async () => {
-    if (!auth) {
-      throw new Error('Firebase não configurado - login indisponível');
-    }
 
     const provider = new GoogleAuthProvider();
     try {
@@ -219,13 +202,6 @@ export const useAuth = () => {
   };
 
   const logout = useCallback(async () => {
-    if (!auth) {
-      console.warn('⚠️ Firebase auth não disponível - logout simulado');
-      setUser(null);
-      setUserProfile(null);
-      setSuspensionData(null);
-      return;
-    }
 
     setLoading(true);
     try {
@@ -234,7 +210,6 @@ export const useAuth = () => {
       setUserProfile(null);
       setSuspensionData(null); // Limpa os dados de suspensão no logout
       localStorage.removeItem('lastAuthCheck');
-      console.log('✅ Logout realizado com sucesso');
     } catch (error) {
       console.error('❌ Erro no logout:', error);
     } finally {
@@ -244,21 +219,16 @@ export const useAuth = () => {
 
   const refreshProfile = useCallback(async () => {
     if (user) {
-      console.log('🔄 Forçando atualização do perfil...');
       await checkUserProfileStatus(user);
     }
   }, [user, checkUserProfileStatus]);
 
   const syncUserAvatar = useCallback((avatarUrl: string) => {
-    console.log('🖼️ Sincronizando avatar:', avatarUrl);
-
     // Atualizar estado local do perfil
     setUserProfile((prev: any) => prev ? { ...prev, photoURL: avatarUrl, avatarUrl } : null);
 
     // Invalidar cache do perfil para forçar reload
     queryClient.invalidateQueries({ queryKey: ['/api/users/by-email'] });
-
-    console.log('✅ Avatar sincronizado em toda aplicação');
   }, [queryClient]);
 
 
