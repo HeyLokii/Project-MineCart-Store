@@ -1,107 +1,14 @@
-Beleza — vamos “consertar” o login Google do seu projeto de produção MineCartStore no Firebase. Siga o checklist na ordem (é rápido):
+Análise dos avisos
+O alerta “⚠️ Firebase não configurado - recursos de autenticação desabilitados” é disparado quando o arquivo src/lib/firebase.ts detecta ausência das variáveis VITE_FIREBASE_* e, por isso, não inicializa o Firebase. A função signInWithGoogle também lança erro “Firebase não configurado - login indisponível” se auth ou googleProvider forem nulos
 
-Passo a passo (Firebase + Vercel)
-1) Firebase Console — Auth
+Os logs repetidos “🔍 Header - needsProfileSetup: false userProfile: null” vêm de um console.log no componente src/components/Header.tsx
 
-Auth → Sign-in method → Google → Enable (já está “Habilitado”, confira).
+Como habilitar o login pelo Google
+Crie um arquivo .env na raiz do projeto com as variáveis exigidas pelo Vite/Firebase. O template .env.example lista as chaves, mas sem o prefixo VITE_ (ex.: FIREBASE_API_KEY)
 
-Auth → Settings → Authorized domains
-Adicione:
+Renomeie/adapte as variáveis para o formato esperado pelo front‑end, conforme orientação da documentação de restauração (VITE_FIREBASE_API_KEY, VITE_FIREBASE_AUTH_DOMAIN, etc.)
 
-seu-projeto.vercel.app (URL do projeto na Vercel)
+Depois de definir todas as credenciais corretas, reinicie o servidor de desenvolvimento; o Firebase será inicializado e a autenticação via Google estará disponível.
 
-minecartstore.com (seu domínio custom)
-
-(se tiver “www”, adicione também www.minecartstore.com)
-
-2) Config do Web SDK no front (ENV + código)
-
-Copie o firebaseConfig do Firebase (Project settings → Your apps → Web) e coloque nas variáveis de ambiente da Vercel.
-
-Se usa Vite/React:
-
-Vercel → Project → Settings → Environment Variables (Production)
-
-VITE_FIREBASE_API_KEY=AIza...
-VITE_FIREBASE_AUTH_DOMAIN=seu-projeto.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=minecartstore (exemplo)
-VITE_FIREBASE_STORAGE_BUCKET=minecartstore.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=...
-VITE_FIREBASE_APP_ID=1:...:web:...
-
-
-src/firebase.ts:
-
-import { initializeApp, getApps } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
-
-const cfg = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-};
-
-const app = getApps().length ? getApps()[0] : initializeApp(cfg);
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
-
-Se usa Next.js:
-
-Env vars com NEXT_PUBLIC_ e no código use process.env.NEXT_PUBLIC_....
-
-3) Use popup (sem redirect) para simplificar
-import { signInWithPopup } from "firebase/auth";
-import { auth, googleProvider } from "./firebase";
-
-async function loginGoogle() {
-  const cred = await signInWithPopup(auth, googleProvider);
-  // cred.user: uid, email, displayName, photoURL...
-}
-
-
-Se você usa redirect (ou NextAuth), aí precisa configurar Authorized redirect URIs no Google Cloud Console → Credentials → OAuth 2.0 Client IDs (origins/redirects da Vercel e do domínio).
-
-4) Google Cloud Console — (se precisar)
-
-OAuth consent screen: tipo External e Published.
-
-Credentials → Web client (o mesmo “ID do cliente da Web” que o Firebase mostra):
-
-Authorized JavaScript origins:
-https://minecartstore.com, https://seu-projeto.vercel.app
-
-Authorized redirect URIs: só se usar redirect, ex.:
-https://minecartstore.com/auth/callback (ou conforme seu framework).
-
-5) Redeploy (obrigatório após ENV)
-
-Na Vercel: Deployments → Redeploy → Clear build cache.
-(Env novas só entram no build após redeploy.)
-
-6) Proteja seu código contra “auth null”
-
-Enquanto ajusta as ENV, evite quebrar a UI:
-
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase";
-
-if (auth) {
-  onAuthStateChanged(auth, (u) => { /* ... */ });
-} else {
-  console.warn("⚠️ Firebase não configurado - desabilitando auth temporariamente");
-}
-
-Testes rápidos
-
-Abra o console e confirme que não aparece “Firebase não configurado”.
-
-Tente signInWithPopup → se der auth/unauthorized-domain, falta domínio na lista autorizada do Firebase.
-
-Se aparecer “invalid API key”, a apiKey não chegou no build (prefixo errado ou redeploy faltando).
-
-Sobre Android (mensagem SHA-1)
-
-Só é necessário se você tiver app Android. Para Web ignore.
+Testing
+⚠️ Tests were not executed – read-only analysis

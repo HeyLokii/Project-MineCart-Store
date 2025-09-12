@@ -25,7 +25,6 @@ export default function Header() {
 
   const isProfileIncomplete = location === '/complete-profile';
 
-  console.log('🔍 Header - needsProfileSetup:', needsProfileSetup, 'userProfile:', userProfile);
 
   const [avatarKey, setAvatarKey] = useState(0);
 
